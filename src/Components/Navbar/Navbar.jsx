@@ -11,7 +11,7 @@ const Navbar = () => {
   };
   return (
     <div>
-      <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700">
+      <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700">
         <nav
           className="relative max-w-8xl w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-16"
           aria-label="Global"
@@ -63,7 +63,7 @@ const Navbar = () => {
             <div className="flex text-[16px] flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 lg:gap-x-7 sm:gap-x-3 sm:mt-0 sm:ps-7">
               <Link to="/">
                 <a
-                  className="font-medium  sm:py-6 dark:text-blue-500"
+                  className=" text-[#86d2fb] font-bold sm:py-6 dark:text-blue-500"
                   aria-current="page"
                 >
                   Home
