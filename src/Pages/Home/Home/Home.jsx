@@ -5,6 +5,8 @@ import Statistic from "../Statistic/Statistic";
 import { Link } from "react-router-dom";
 import Plans from "../Plans/Plans";
 import ContactUs from "../Contact/ContactUs";
+import Footer from "../Footer/Footer";
+import Publisher from "../Publisher/Publisher";
 
 const Home = () => {
   
@@ -47,7 +49,9 @@ const Home = () => {
       <Trending />
       <Statistic />
       <Plans/>
+      <Publisher/>
       <ContactUs/>
+      <Footer/>
     </div>
   );
 };

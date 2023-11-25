@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { FaSignOutAlt } from "react-icons/fa";
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -17,13 +18,9 @@ const Navbar = () => {
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
-            <a
-              className="flex-none text-xl font-semibold dark:text-white"
-              href="#"
-              aria-label="Brand"
-            >
-              Brand
-            </a>
+            <Link to='/'>
+              <img className="w-[120px] lg:w-[140px]" src={logo} alt="" />
+            </Link>
             <div className="sm:hidden">
               <button
                 type="button"
@@ -119,15 +116,14 @@ const Navbar = () => {
                     <FaSignOutAlt />
                   </div> */}
 
-                  
-                    <button onClick={handleLogOut}
-                      className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 sm:my-6 sm:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
-                      href="#"
-                    >
-                      Sign Out
-                       <FaSignOutAlt />
-                    </button>
-                  
+                  <button
+                    onClick={handleLogOut}
+                    className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 sm:my-6 sm:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
+                    href="#"
+                  >
+                    Sign Out
+                    <FaSignOutAlt />
+                  </button>
                 </>
               ) : (
                 <>
