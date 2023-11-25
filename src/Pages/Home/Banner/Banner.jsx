@@ -9,7 +9,7 @@ const Banner = () => {
       <Container>
         <span className="flex items-center">
           <strong className="bg-red-500 px-7 py-2 rounded-md text-white">
-            News:{" "}
+            Update:{" "}
           </strong>{" "}
           <Marquee className="text-gray-500">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
@@ -20,7 +20,7 @@ const Banner = () => {
           </Marquee>
         </span>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 my-6 lg:h-[75vh]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 my-6 justify-center lg:h-[75vh]">
           <div className="col-span-2 w-full">
             <Carousel />
           </div>
@@ -29,7 +29,8 @@ const Banner = () => {
             <div className="border-2 shadow-lg mb-3 p-4 rounded-lg">
               <div className="flex gap-2 ">
                 <div className="w-[250px] h-[100px]">
-                  <img className="w-full h-full rounded-lg"
+                  <img
+                    className="w-full h-full rounded-lg"
                     src="https://tds-images.thedailystar.net/sites/default/files/styles/big_201/public/images/2023/11/20/khadijatul_kubra_finally_out_of_jail.png"
                     alt=""
                   />
@@ -45,8 +46,9 @@ const Banner = () => {
             <div className="border-2 shadow-lg mb-3 p-4 rounded-lg">
               <div className="flex gap-2 ">
                 <div className="w-[250px] h-[100px]">
-                  <img className="w-full h-full rounded-lg"
-                    src="https://tds-images.thedailystar.net/sites/default/files/styles/big_201/public/images/2023/11/20/khadijatul_kubra_finally_out_of_jail.png"
+                  <img
+                    className="w-full h-full rounded-lg"
+                    src="https://media.cnn.com/api/v1/images/stellar/prod/231122093931-05-argentina-brazil-112123.jpg?c=16x9&q=h_720,w_1280,c_fill"
                     alt=""
                   />
                 </div>
@@ -61,8 +63,9 @@ const Banner = () => {
             <div className="border-2 shadow-lg mb-3 p-4 rounded-lg">
               <div className="flex gap-2 ">
                 <div className="w-[250px] h-[100px]">
-                  <img className="w-full h-full rounded-lg"
-                    src="https://tds-images.thedailystar.net/sites/default/files/styles/big_201/public/images/2023/11/20/khadijatul_kubra_finally_out_of_jail.png"
+                  <img
+                    className="w-full h-full rounded-lg"
+                    src="https://tds-images-bn.thedailystar.net/sites/default/files/styles/big_202/public/images/2023/11/24/palestine.jpg"
                     alt=""
                   />
                 </div>
@@ -74,8 +77,6 @@ const Banner = () => {
                 </div>
               </div>
             </div>
-           
-           
           </div>
         </div>
       </Container>

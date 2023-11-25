@@ -63,7 +63,7 @@ const Navbar = () => {
             <div className="flex text-[16px] flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 lg:gap-x-7 sm:gap-x-3 sm:mt-0 sm:ps-7">
               <Link to="/">
                 <a
-                  className=" text-[#86d2fb] font-bold sm:py-6 dark:text-blue-500"
+                  className=" text-red-400 font-bold sm:py-6 dark:text-blue-500"
                   aria-current="page"
                 >
                   Home
