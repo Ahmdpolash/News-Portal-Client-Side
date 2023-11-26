@@ -29,7 +29,7 @@ const AddPublisher = () => {
         image: res.data.data.display_url,
         publisher,
       };
-      const result = await axiosPublic.post("/articles", data);
+      const result = await axiosPublic.post("/publishers", data);
       console.log(result.data);
       if (result.data.insertedId) {
         toast.success("Publisher Info Added Successfully");

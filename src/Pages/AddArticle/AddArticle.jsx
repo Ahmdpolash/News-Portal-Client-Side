@@ -3,6 +3,7 @@ import Select from "react-select";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Hooks/useAuth";
 // import { colorOptions } from "../data";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -10,13 +11,13 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const AddArticle = () => {
   const axiosPublic = useAxiosPublic();
-
+  const { user } = useAuth();
   const [Value, getValue] = useState([]);
 
   const { data: publisher = [] } = useQuery({
     queryKey: ["article"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/articles");
+      const res = await axiosPublic.get("/publishers");
       console.log(res.data);
       return res.data; // Add this line to return the data
     },
@@ -30,12 +31,6 @@ const AddArticle = () => {
     { value: "Politics", label: "Politics" },
   ];
 
-  const options2 = [
-    { value: "Prothom Alo", label: "Prothom Alo" },
-    { value: "The Daily News", label: "The Daily News" },
-    { value: "Manobjomin", label: "Manobjomin" },
-  ];
-
   const Diagnose = (e) => {
     getValue(Array.isArray(e) ? e.map((x) => x.label) : []);
   };
@@ -47,7 +42,7 @@ const AddArticle = () => {
     const title = form.title.value;
     const description = form.description.value;
     const image = form.image.files[0];
-    const publisher = Value;
+    const publisher = form.publishers.value;
     const time = new Date();
 
     const imgFile = { image: image };
@@ -61,18 +56,23 @@ const AddArticle = () => {
 
     if (res.data.success) {
       const data = {
-        title,
+        title,   
         tag,
         description,
         publisher,
+        email: user?.email,
+        authors_name: user?.displayName,
+        authors_image:user?.photoURL,
         image: res.data.data.display_url,
         time,
         status: "pending",
       };
+      console.log(data);
       const result = await axiosPublic.post("/articles", data);
       console.log(result.data);
       if (result.data.insertedId) {
         toast.success("Article Added Successfully ! Please Waite For Approval");
+        form.reset();
       }
     }
   };
@@ -99,6 +99,7 @@ const AddArticle = () => {
                   type="text"
                   placeholder="Title"
                   name="title"
+                  required
                   className="input border-gray-300 w-full border-2  py-3 px-2 rounded-md input-bordered"
                 />
               </label>
@@ -114,6 +115,7 @@ const AddArticle = () => {
                 <input
                   type="file"
                   name="image"
+                  required
                   className="input px-2 bg-white outline-red-400 w-full border-2 py-[9px] input-bordered"
                 />
               </label>
@@ -136,7 +138,12 @@ const AddArticle = () => {
                 onChange={Diagnose}
               /> */}
 
-              <select className="border-2 px-2 py-2 my-1 w-full bg-white" name="" id="">
+              <select
+                className="border-2 px-2 py-2 my-1 w-full bg-white"
+                name="publishers"
+                required
+                id=""
+              >
                 {publisher.map((item, index) => (
                   <option key={index} value={item?.publisher}>
                     {item?.publisher}
@@ -153,6 +160,7 @@ const AddArticle = () => {
               </label>
 
               <Select
+              required
                 multiple="multiple"
                 options={options}
                 onChange={Diagnose}
@@ -176,6 +184,7 @@ const AddArticle = () => {
               name="description"
               className="w-full border-gray-300 border-2 p-4"
               id=""
+              required
               placeholder="Description"
               cols="30"
               rows="7"

@@ -1,11 +1,25 @@
 import React from "react";
+import useUser from "../../../Hooks/useUser";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const AllUsers = () => {
+  const [users] = useUser();
+  const axiosPublic = useAxiosPublic();
+
+  const handleMakeAdmin = (user) => {
+
+    
+
+
+
+
+  };
+
   return (
     <div>
       <div className="bg-red-200 rounded-md">
         <h3 className="text-black font-semibold text-[15px] px-4">
-          Total User Found
+          Total {users?.length} User Found
         </h3>
       </div>
 
@@ -45,43 +59,52 @@ const AllUsers = () => {
               </th>
               <th
                 scope="col"
-                className="px-6  py-3 text-centertext-xs font-medium text-gray-500 uppercase tracking-wider"
+                className="px-6  py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Make Admin
+                Role
               </th>
             </tr>
           </thead>
 
           <tbody className="bg-white divide-y divide-gray-200">
-            <tr>
-              <td className="px-6 text-center py-4 whitespace-nowrap">1</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex justify-center items-center">
-                  <div className="flex-shrink-0 h-10 w-10">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src="https://i.pravatar.cc/150?img=1"
-                      alt=""
-                    />
+            {users?.map((user, index) => (
+              <tr key={user._id}>
+                <td className="px-6 text-center py-4 whitespace-nowrap">
+                  {index + 1}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex justify-center items-center">
+                    <div className="flex-shrink-0 h-10 w-10">
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={user?.image}
+                        alt=""
+                      />
+                    </div>
                   </div>
-                </div>
-              </td>
+                </td>
 
-              <td className="px-6  text-center py-4 whitespace-nowrap">
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  Active
-                </span>
-              </td>
-              <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
-                Admin
-              </td>
-              <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
-                Admin
-              </td>
-              <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
-                jane.cooper@example.com
-              </td>
-            </tr>
+                <td className="px-6  text-center py-4 whitespace-nowrap">
+                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    {user?.name}
+                  </span>
+                </td>
+                <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
+                  {user?.email}
+                </td>
+                <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
+                  {user?.date}
+                </td>
+                <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
+                  <button
+                    onClick={() => handleMakeAdmin(user)}
+                    className="bg-red-600 text-[13px] shadow-md text-white font-bold py-2 rounded-md px-4"
+                  >
+                    Make Admin
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

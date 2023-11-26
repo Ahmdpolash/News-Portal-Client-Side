@@ -19,6 +19,7 @@ const SocialLogin = () => {
           email: res.user.email,
           name: res.user.displayName,
           date: new Date(),
+          image:res.user.photoURL
         };
         navigate("/");
 
