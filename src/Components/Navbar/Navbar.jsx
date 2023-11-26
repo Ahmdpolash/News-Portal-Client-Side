@@ -18,7 +18,7 @@ const Navbar = () => {
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
-            <Link to='/'>
+            <Link to="/">
               <img className="w-[120px] lg:w-[140px]" src={logo} alt="" />
             </Link>
             <div className="sm:hidden">
@@ -88,18 +88,18 @@ const Navbar = () => {
                 Subscription
               </Link>
               <Link
-                to="/myArticle"
-                className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                href="#"
-              >
-                My Article
-              </Link>
-              <Link
                 to="/premium"
                 className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
                 href="#"
               >
                 Premium Articles
+              </Link>
+              <Link
+                to="/myArticle"
+                className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                href="#"
+              >
+                My Article
               </Link>
 
               {user ? (

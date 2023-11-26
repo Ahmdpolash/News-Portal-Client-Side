@@ -1,32 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 // import { colorOptions } from "../data";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const AddArticle = () => {
+  const axiosPublic = useAxiosPublic();
+
+  const [Value, getValue] = useState([]);
+
   const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+    { value: "Technology", label: "Technology" },
+    { value: "Sport", label: "Sport" },
+    { value: "Fashion", label: "Fashion" },
+    { value: "Travel", label: "Travel" },
+    { value: "Politics", label: "Politics" },
   ];
 
-  const handleAddArticle = e => {
-    e.preventDefault()
-    const form = e.target 
-    const title = form.title.value
-    const tag = Array.isArray(form.tag) ? form.tag.map((tag) => tag.value).join(', ') : form.tag.value;
-    const description = form.description.value
-    const image = form.image.value 
-    const publisher = form.publisher.value
+  const options2 = [
+    { value: "Prothom Alo", label: "Prothom Alo" },
+    { value: "The Daily News", label: "The Daily News" },
+    { value: "Manobjomin", label: "Manobjomin" },
+  ];
 
-    const formData = {title,tag,description,publisher,image}
-    console.log(formData);
-  }
+  const Diagnose = (e) => {
+    getValue(Array.isArray(e) ? e.map((x) => x.label) : []);
+  };
 
+  const handleAddArticle = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const tag = Value;
+    const title = form.title.value;
+    const description = form.description.value;
+    const image = form.image.files[0];
+    const publisher = Value;
+    const time = new Date();
+
+
+    const imgFile = { image: image };
+
+    const res = await axiosPublic.post(image_hosting_api, imgFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    console.log(res.data);
+
+    if (res.data.success) {
+      const data = {
+        title,
+        tag,
+        description,
+        publisher,
+        image: res.data.data.display_url,
+        time,
+      };
+      const result = await axiosPublic.post("/articles", data);
+      console.log(result.data);
+    }
+  };
 
   return (
     <div>
       <div className="bg-white p-4">
-        <form onSubmit={handleAddArticle} className="py-4 mt-3 px-10 lg:w-3/4 bg-gray-100  rounded-md mx-auto border-2 shadow-lg">
+        <form
+          onSubmit={handleAddArticle}
+          className="py-4 mt-3 px-10 lg:w-3/4 bg-gray-100  rounded-md mx-auto border-2 shadow-lg"
+        >
           <h2 className="text-3xl  text-black lg:text-5xl mb-3 font-bold text-center">
             Add New Article{" "}
           </h2>
@@ -71,11 +114,15 @@ const AddArticle = () => {
                 </span>
               </label>
 
-              <input
-                type="text"
-                placeholder="Publisher Name"
-                name="publisher"
-                className="input border-2 border-gray-300 px-2 py-3 rounded-md outline-red-400 w-full input-bordered"
+              <Select
+                multiple="multiple"
+                options={options2}
+                onChange={Diagnose}
+                isMulti
+                name="tag"
+                // options={colorOptions}
+                className="basic-multi-select py-2"
+                classNamePrefix="select"
               />
             </div>
 
@@ -87,16 +134,15 @@ const AddArticle = () => {
               </label>
 
               <Select
+                multiple="multiple"
                 options={options}
-                
-                // defaultValue={[colorOptions[2], colorOptions[3]]}
+                onChange={Diagnose}
                 isMulti
                 name="tag"
                 // options={colorOptions}
                 className="basic-multi-select py-2"
                 classNamePrefix="select"
               />
-
             </div>
           </div>
 

@@ -7,9 +7,9 @@ import Plans from "../Plans/Plans";
 import ContactUs from "../Contact/ContactUs";
 import Footer from "../Footer/Footer";
 import Publisher from "../Publisher/Publisher";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
-  
   // const [showModal, setShowModal] = useState(false);
 
   // const handleSubscribe = () => {
@@ -32,6 +32,12 @@ const Home = () => {
 
   return (
     <div>
+      
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Daily News |Home</title>
+      </Helmet>
+
       {/* {showModal && (
         <div className="modal absolute bg-green-400 flex items-center h-72 rounded-lg left-[35%] top-[30%] w-72 z-10">
           <div className="modal-content">
@@ -48,10 +54,10 @@ const Home = () => {
       <Banner />
       <Trending />
       <Statistic />
-      <Plans/>
-      <Publisher/>
-      <ContactUs/>
-      <Footer/>
+      <Plans />
+      <Publisher />
+      <ContactUs />
+      <Footer />
     </div>
   );
 };

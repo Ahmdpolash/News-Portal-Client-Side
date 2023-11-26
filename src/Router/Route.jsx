@@ -6,6 +6,14 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AddArticle from "../Pages/AddArticle/AddArticle";
+import AllArticle from "../Pages/AllArticle/AllArticle";
+import MyArticle from "../Pages/MyArticle/MyArticle";
+import Dashboard from "../Layout/Dashboard";
+import AllUsers from "../Pages/Dashboard/AllUsers/Allusers";
+import AddPublisher from "../Pages/Dashboard/AddPublisher/AddPublisher";
+import AdminArticle from "../Pages/Dashboard/AdminArticle/AdminArticle";
+import Profile from "../Pages/Profile/Profile";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 
 const Route = createBrowserRouter([
   {
@@ -21,6 +29,18 @@ const Route = createBrowserRouter([
         path: "/addArticle",
         element: <AddArticle />,
       },
+      {
+        path: "/allArticle",
+        element: <AllArticle />,
+      },
+      {
+        path: "/myArticle",
+        element: <MyArticle />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
     ],
   },
   {
@@ -30,6 +50,29 @@ const Route = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  // =====================Admin routes===============================//
+  {
+    path: "/Dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "adminHome",
+        element: <AdminHome />,
+      },
+      {
+        path: "allUsers",
+        element: <AllUsers />,
+      },
+      {
+        path: "publisher",
+        element: <AddPublisher />,
+      },
+      {
+        path: "adminArticle",
+        element: <AdminArticle />,
+      },
+    ],
   },
 ]);
 

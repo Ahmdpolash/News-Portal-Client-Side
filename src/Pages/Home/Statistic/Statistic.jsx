@@ -40,6 +40,7 @@ const Statistic = () => {
             </p>
           </div>
         </div>
+        
       </div>
     </Container>
   );
