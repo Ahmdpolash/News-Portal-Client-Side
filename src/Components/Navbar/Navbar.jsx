@@ -101,6 +101,13 @@ const Navbar = () => {
               >
                 My Article
               </Link>
+              <Link
+                to="/dashboard"
+                className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                href="#"
+              >
+                Dashboard
+              </Link>
 
               {user ? (
                 <>

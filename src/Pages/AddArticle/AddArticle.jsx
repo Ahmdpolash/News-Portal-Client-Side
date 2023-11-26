@@ -57,6 +57,7 @@ const AddArticle = () => {
         publisher,
         image: res.data.data.display_url,
         time,
+        status:'pending'
       };
       const result = await axiosPublic.post("/articles", data);
       console.log(result.data);
@@ -138,7 +139,7 @@ const AddArticle = () => {
                 options={options}
                 onChange={Diagnose}
                 isMulti
-                name="tag"
+                name="publisher"
                 // options={colorOptions}
                 className="basic-multi-select py-2"
                 classNamePrefix="select"
