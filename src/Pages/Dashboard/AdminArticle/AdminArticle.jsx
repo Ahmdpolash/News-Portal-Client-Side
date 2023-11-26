@@ -1,8 +1,18 @@
 import React from "react";
+import useAuth from "../../../Hooks/useAuth";
+import useArticle from "../../../Hooks/useArticle";
+import useUser from "../../../Hooks/useUser";
 
 const AdminArticle = () => {
+  const { user } = useAuth();
+
+  const { articles } = useArticle();
+  const { users } = useUser();
+
+  console.log(articles);
+
   return (
-    <div>
+    <div>  
       <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
         <thead className="bg-gray-50">
           <tr>
@@ -10,7 +20,7 @@ const AdminArticle = () => {
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
-              Name
+              Author
             </th>
             <th
               scope="col"
@@ -28,7 +38,7 @@ const AdminArticle = () => {
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
-             Date
+              Date
             </th>
             <th
               scope="col"
@@ -50,7 +60,6 @@ const AdminArticle = () => {
             >
               Actions
             </th>
-
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -66,11 +75,9 @@ const AdminArticle = () => {
                 </div>
                 <div className="ml-4">
                   <div className="text-sm font-medium text-gray-900">
-                    Jane Cooper
+                    {user?.displayName}
                   </div>
-                  <div className="text-sm text-gray-500">
-                    jane.cooper@example.com
-                  </div>
+                  <div className="text-sm text-gray-500">{user?.email}</div>
                 </div>
               </div>
             </td>
@@ -102,7 +109,7 @@ const AdminArticle = () => {
 
             <td className="px-6  py-4 whitespace-nowrap  text-sm font-medium">
               <a href="#" className="text-indigo-600 hover:text-indigo-900">
-             Premium
+                Premium
               </a>
               <a href="#" className="ml-2 text-red-600 hover:text-red-900">
                 Delete

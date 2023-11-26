@@ -10,17 +10,17 @@ const SocialLogin = () => {
   const navigate = useNavigate();
 
   const handleGoogleLogin = () => {
-    
     const toastId = toast.loading("logging In");
 
     googleLogin()
       .then((res) => {
-        console.log(res.user);
+        
         const userInfo = {
           email: res.user.email,
           name: res.user.displayName,
+          date: new Date(),
         };
-        navigate('/')
+        navigate("/");
 
         axiosPublic.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {

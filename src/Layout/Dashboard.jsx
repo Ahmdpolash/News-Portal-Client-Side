@@ -16,7 +16,7 @@ const Dashboard = () => {
           >
             <span className="sr-only">Toggle Navigation</span>
             <svg
-              className="flex-shrink-0 w-4 h-4"
+              className="flex-shrink-0 w-10 h-10 ml-3 mt-3"
               width="16"
               height="16"
               fill="currentColor"
@@ -106,7 +106,7 @@ const Dashboard = () => {
                 </li>
 
                 <li className="hs-accordion" id="users-accordion">
-                  <NavLink to="/dashboard/allUsers">
+                  <NavLink to="/dashboard/publisher">
                     <button
                       type="button"
                       className="hs-accordion-toggle  hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 "

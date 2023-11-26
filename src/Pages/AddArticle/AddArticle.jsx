@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 // import { colorOptions } from "../data";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -10,6 +12,15 @@ const AddArticle = () => {
   const axiosPublic = useAxiosPublic();
 
   const [Value, getValue] = useState([]);
+
+  const { data: publisher = [] } = useQuery({
+    queryKey: ["article"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/articles");
+      console.log(res.data);
+      return res.data; // Add this line to return the data
+    },
+  });
 
   const options = [
     { value: "Technology", label: "Technology" },
@@ -39,7 +50,6 @@ const AddArticle = () => {
     const publisher = Value;
     const time = new Date();
 
-
     const imgFile = { image: image };
 
     const res = await axiosPublic.post(image_hosting_api, imgFile, {
@@ -57,10 +67,13 @@ const AddArticle = () => {
         publisher,
         image: res.data.data.display_url,
         time,
-        status:'pending'
+        status: "pending",
       };
       const result = await axiosPublic.post("/articles", data);
       console.log(result.data);
+      if (result.data.insertedId) {
+        toast.success("Article Added Successfully ! Please Waite For Approval");
+      }
     }
   };
 
@@ -110,21 +123,26 @@ const AddArticle = () => {
           <div className="flex flex-col lg:flex-row gap-3 lg:px-4 mb-2">
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text dark:text-white text-[17px] font-semibold">
+                <span className="label-text dark:text-white  text-[17px] font-semibold">
                   Publisher Name
                 </span>
               </label>
 
-              <Select
-                multiple="multiple"
+              {/* <Select
+                className="basic-single py-2 w-full"
+                classNamePrefix="select"
+                name="publisher"
                 options={options2}
                 onChange={Diagnose}
-                isMulti
-                name="tag"
-                // options={colorOptions}
-                className="basic-multi-select py-2"
-                classNamePrefix="select"
-              />
+              /> */}
+
+              <select className="border-2 px-2 py-2 my-1 w-full bg-white" name="" id="">
+                {publisher.map((item, index) => (
+                  <option key={index} value={item?.publisher}>
+                    {item?.publisher}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="form-control w-full">
