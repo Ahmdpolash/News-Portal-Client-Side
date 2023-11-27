@@ -6,9 +6,10 @@ import logo from "../../assets/logo.png";
 import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
+  
   const { user, logOut } = useAuth();
 
-  const { isAdmin } = useAdmin();
+  const { isAdmin,isLoading } = useAdmin();
 
   const handleLogOut = () => {
     logOut();
@@ -16,6 +17,7 @@ const Navbar = () => {
 
   return (
     <div>
+      {isLoading && <p>Loading...</p>}
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700">
         <nav
           className="relative max-w-8xl w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-16"

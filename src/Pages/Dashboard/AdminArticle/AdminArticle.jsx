@@ -2,6 +2,7 @@ import React from "react";
 import useArticle from "../../../Hooks/useArticle";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { IoCheckmarkCircleSharp } from "react-icons/io5";
 
 const AdminArticle = () => {
   const axiosPublic = useAxiosPublic();
@@ -29,6 +30,18 @@ const AdminArticle = () => {
           }
         });
       }
+    });
+  };
+
+  const handleApprove = (id) => {
+    axiosPublic.patch(`/articles/${id}`).then((res) => {
+      console.log(res.data);
+    });
+  };
+
+  const handlePremium = (id) => {
+    axiosPublic.patch(`/articles/premium/${id}`).then((res) => {
+      console.log(res.data);
     });
   };
 
@@ -70,16 +83,16 @@ const AdminArticle = () => {
 
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Approval
             </th>
 
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              className="px-6 py-3 font-bold text-center text-xs  text-gray-500 uppercase tracking-wider"
             >
-              Actions
+              Make Premium
             </th>
           </tr>
         </thead>
@@ -104,7 +117,7 @@ const AdminArticle = () => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  {article?.status}
+                  {article?.status ? article.status : "pending"}
                 </span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -116,25 +129,43 @@ const AdminArticle = () => {
 
               <td className="px-6  py-4 whitespace-nowrap text-sm text-gray-500">
                 <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                  Approve
+                  <button onClick={() => handleApprove(article?._id)}>
+                    Approve
+                  </button>
                 </a>
-                <a href="#" className="ml-2 text-red-600 hover:text-red-900">
-                  Decline
+                <a
+                  href="#"
+                  className="ml-2 text-red-600 text-center hover:text-red-900"
+                >
+                  <button data-hs-overlay="#hs-focus-management-modal">
+                    Decline
+                  </button>
                 </a>
               </td>
 
-              <td className="px-6  py-4 whitespace-nowrap  text-sm font-medium">
+              <td className="px-6 flex items-center justify-center mt-2 gap-3 py-4 whitespace-nowrap text-center  text-sm font-medium">
                 <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                  Premium
+                  {article?.Quality === "premium" ? (
+                    <p className="text-[23px]">
+                      <IoCheckmarkCircleSharp />
+                    </p>
+                  ) : (
+                    <button onClick={() => handlePremium(article?._id)}>
+                      Premium
+                    </button>
+                  )}
                 </a>
                 <a href="#" className="ml-2 text-red-600 hover:text-red-900">
-                 <button>Delete</button>
+                  <button onClick={() => handleDelete(article?._id)}>
+                    Delete
+                  </button>
                 </a>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
     </div>
   );
 };
