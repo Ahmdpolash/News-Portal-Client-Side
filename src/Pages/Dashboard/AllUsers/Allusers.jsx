@@ -7,10 +7,12 @@ const AllUsers = () => {
   const [users, refetch] = useUser();
   const axiosPublic = useAxiosPublic();
 
-  const handleMakeAdmin = (user) => {
-    const result = axiosPublic.patch(`/users/admin/${user._id}`);
+  const handleMakeAdmin =async (user) => {
+    
+    const result =await axiosPublic.patch(`/users/admin/${user._id}`);
     console.log(result);
     if (result.data.modifiedCount > 0) {
+      refetch();
       Swal.fire({
         position: "top-end",
         icon: "success",

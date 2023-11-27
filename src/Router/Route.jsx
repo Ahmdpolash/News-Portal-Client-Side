@@ -28,19 +28,36 @@ const Route = createBrowserRouter([
       },
       {
         path: "/addArticle",
-        element: <AddArticle />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <AddArticle />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/allArticle",
-        element: <AllArticle />,
+        element: (
+          <PrivateRoute>
+            <AllArticle />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myArticle",
-        element: <MyArticle />,
+        element: (
+          <PrivateRoute>
+            <MyArticle />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
     ],
   },

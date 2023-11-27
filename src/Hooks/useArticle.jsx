@@ -5,7 +5,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useArticle = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: articles = [] } = useQuery({
+  const { data: articles = [],refetch } = useQuery({
     queryKey: ["adminArticle"],
     queryFn: async () => {
       const res = await axiosPublic.get("/articles");
@@ -13,7 +13,7 @@ const useArticle = () => {
       return res.data;
     },
   });
-  return [articles]
+  return [articles,refetch]
 
  
 };

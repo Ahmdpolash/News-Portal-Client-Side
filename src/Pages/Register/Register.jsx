@@ -21,7 +21,6 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0];
-    const toastId = toast.loading("logging In");
 
     const formData = {
       name,
@@ -32,21 +31,14 @@ const Register = () => {
     console.log(formData);
 
     if (password.length < 6) {
-      return toast.error("Password must be at least 6 characters long", {
-        id: toastId,
-      });
+      return toast.error("Password must be at least 6 characters long");
     } else if (!/[A-Z]/.test(password)) {
-      return toast.error("Password must contain at least one Capital letter.", {
-        id: toastId,
-      });
+      return toast.error("Password must contain at least one Capital letter.");
     } else if (!/[0-9]/.test(password)) {
-      return toast.error("Password must contain at least one Numeric letter.", {
-        id: toastId,
-      });
+      return toast.error("Password must contain at least one Numeric letter.");
     } else if (!/[!@#$%^&*:;?,.]/.test(password)) {
       return toast.error(
-        "Password must contain at least one special character",
-        { id: toastId }
+        "Password must contain at least one special character"
       );
     }
 
@@ -65,21 +57,18 @@ const Register = () => {
         name,
         email,
         image: res.data.data.display_url,
+        date: new Date(),
       };
+      navigate("/");
 
       const result = await axiosPublic.post("/users", data);
-      console.log(result.data);
+
       if (result.data.insertedId) {
-        createUser(email, password)
-          .then((data) => {
-            // console.log(data);
-            profile(res.data.data.display_url, name).then((res) => {
-              // console.log(res);
-              toast.success("User created successfully", { id: toastId });
-              navigate(location.state ? location.state : "/");
-            });
-          })
-          .catch((err) => console.log(err.message));
+        createUser(email, password).then(() => {
+          profile(res.data.data.display_url, name).then((res) => {
+            navigate("/");
+          });
+        });
       }
     }
   };
