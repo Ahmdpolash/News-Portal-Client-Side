@@ -9,7 +9,7 @@ import ArticleCard from "./ArticleCard";
 const AllArticle = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: articles = [] } = useQuery({
+  const { data: articles = [], isLoading } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
       const res = await axiosPublic.get("/articles");
@@ -24,6 +24,7 @@ const AllArticle = () => {
         <meta charSet="utf-8" />
         <title>Daily News | All Article</title>
       </Helmet>
+
       <Container>
         <div className="flex flex-col md:flex-row lg:flex-row flex-wrap justify-between lg:items-center gap-2">
           {/* <h3>Sort By</h3> */}
@@ -69,7 +70,7 @@ const AllArticle = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 my-10 ">
           {articles?.map((article) => (
-            <ArticleCard key={article._id} article={article} />
+            <ArticleCard key={article._id} isLoading={isLoading} article={article} />
           ))}
         </div>
       </Container>
