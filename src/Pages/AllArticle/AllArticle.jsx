@@ -12,7 +12,7 @@ const AllArticle = () => {
   const { data: articles = [], isLoading } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/articles");
+      const res = await axiosPublic.get("/article/approve");
       console.log(res.data);
       return res.data; // Add this line to return the data
     },
@@ -68,7 +68,7 @@ const AllArticle = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 my-10 ">
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 my-10 ">
           {articles?.map((article) => (
             <ArticleCard key={article._id} article={article} />
           ))}

@@ -1,4 +1,6 @@
 import React from "react";
+import Charts from "./chart";
+import Line from "./Line";
 
 const AdminHome = () => {
   return (
@@ -77,6 +79,11 @@ const AdminHome = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1  lg:grid-cols-2 gap-3">
+          <Line/>
+          <Charts />
         </div>
       </div>
     </div>
