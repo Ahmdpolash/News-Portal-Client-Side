@@ -14,6 +14,7 @@ import AddPublisher from "../Pages/Dashboard/AddPublisher/AddPublisher";
 import AdminArticle from "../Pages/Dashboard/AdminArticle/AdminArticle";
 import Profile from "../Pages/Profile/Profile";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
+import PrivateRoute from "../Router/PrivateRoute";
 
 const Route = createBrowserRouter([
   {

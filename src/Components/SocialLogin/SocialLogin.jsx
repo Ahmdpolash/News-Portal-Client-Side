@@ -1,16 +1,17 @@
 import React from "react";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const SocialLogin = () => {
   const { googleLogin } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
+  const location = useLocation()
 
   const handleGoogleLogin = () => {
-    const toastId = toast.loading("logging In");
+    // const toastId = toast.loading("logging In");
 
     googleLogin()
       .then((res) => {
@@ -21,12 +22,13 @@ const SocialLogin = () => {
           date: new Date(),
           image:res.user.photoURL
         };
-        navigate("/");
+        navigate('/')
+       
 
         axiosPublic.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {
-            navigate("/");
-            toast.success("Login Success", { id: toastId });
+            // navigate(location.state? location.state : '/');
+            // toast.success("Login Success", { id: toastId });
           }
         });
       })

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -12,6 +12,7 @@ const Register = () => {
   const { user, createUser, profile } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -75,7 +76,7 @@ const Register = () => {
             profile(res.data.data.display_url, name).then((res) => {
               // console.log(res);
               toast.success("User created successfully", { id: toastId });
-              navigate("/");
+              navigate(location.state ? location.state : "/");
             });
           })
           .catch((err) => console.log(err.message));

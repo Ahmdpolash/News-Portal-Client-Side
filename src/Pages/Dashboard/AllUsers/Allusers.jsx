@@ -1,18 +1,24 @@
 import React from "react";
 import useUser from "../../../Hooks/useUser";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
-  const [users] = useUser();
+  const [users, refetch] = useUser();
   const axiosPublic = useAxiosPublic();
 
   const handleMakeAdmin = (user) => {
-
-    
-
-
-
-
+    const result = axiosPublic.patch(`/users/admin/${user._id}`);
+    console.log(result);
+    if (result.data.modifiedCount > 0) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `${user.name} is Admin Now`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
   return (
@@ -96,12 +102,20 @@ const AllUsers = () => {
                   {user?.date}
                 </td>
                 <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
-                  <button
-                    onClick={() => handleMakeAdmin(user)}
-                    className="bg-red-600 text-[13px] shadow-md text-white font-bold py-2 rounded-md px-4"
-                  >
-                    Make Admin
-                  </button>
+                  {user?.role === "admin" ? (
+                    <>
+                      <span className="px-3 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        Admin
+                      </span>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => handleMakeAdmin(user)}
+                      className="bg-red-600 text-[13px] shadow-md text-white font-bold py-2 rounded-md px-4"
+                    >
+                      Make Admin
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}

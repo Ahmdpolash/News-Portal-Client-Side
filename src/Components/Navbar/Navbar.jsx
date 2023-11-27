@@ -3,13 +3,17 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { FaSignOutAlt } from "react-icons/fa";
 import logo from "../../assets/logo.png";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
 
+  const { isAdmin } = useAdmin();
+
   const handleLogOut = () => {
     logOut();
   };
+
   return (
     <div>
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700">
@@ -101,27 +105,22 @@ const Navbar = () => {
               >
                 My Article
               </Link>
-              <Link
-                to="/dashboard"
-                className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                href="#"
-              >
-                Dashboard
-              </Link>
+
+              {isAdmin && (
+                <Link
+                  to="/dashboard"
+                  className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                  href="#"
+                >
+                  Dashboard
+                </Link>
+              )}
 
               {user ? (
                 <>
                   <span className="inline-block h-[2.875rem] w-[2.875rem] bg-gray-100 rounded-full overflow-hidden">
                     <img className="" src={user?.photoURL} alt="" />
                   </span>
-                  {/* 
-                  <div className="flex bg-gray-200 py-2 px-4 rounded-lg gap-2 items-center">
-                    <button onClick={handleLogOut} className="font-bold">
-                      {" "}
-                      Sign Out
-                    </button>
-                    <FaSignOutAlt />
-                  </div> */}
 
                   <button
                     onClick={handleLogOut}
