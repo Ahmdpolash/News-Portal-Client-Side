@@ -1,6 +1,6 @@
 import React from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import Container from "../Shared/Container/Container";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
@@ -21,7 +21,6 @@ const AllArticle = () => {
   return (
     <div className="bg-gray-100">
       <Helmet>
-        <meta charSet="utf-8" />
         <title>Daily News | All Article</title>
       </Helmet>
 
@@ -73,98 +72,10 @@ const AllArticle = () => {
             <ArticleCard key={article._id} article={article} />
           ))}
         </div>
+        {/* </InfiniteScroll> */}
       </Container>
     </div>
   );
 };
 
 export default AllArticle;
-
-// <div className="relative border flex w-full lg:h-[210px] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
-// <div className="relative w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-r-none shrink-0 rounded-xl bg-clip-border">
-//   <img
-//     src="https://tds-images.thedailystar.net/sites/default/files/styles/big_201/public/images/2023/11/20/khadijatul_kubra_finally_out_of_jail.png"
-//     alt="image"
-//     className="object-cover w-full h-full"
-//   />
-// </div>
-// <div className="p-6">
-//   <h1 className="font-bold">Top 10 way to Earn Money</h1>
-//   <p>
-//     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-//     Sapiente eligendi ad porro ullam ipsam ratione!
-//   </p>
-//   <p className="font-semibold my-2">Publisher : Polash</p>
-//   <Link>
-//     <button className="bg-black text-white py-2 px-4 rounded-md">
-//       View Details..
-//     </button>
-//   </Link>
-// </div>
-// </div>
-// <div className="relative border flex w-full lg:h-[210px] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
-// <div className="relative w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-r-none shrink-0 rounded-xl bg-clip-border">
-//   <img
-//     src="https://tds-images.thedailystar.net/sites/default/files/styles/big_201/public/images/2023/11/20/khadijatul_kubra_finally_out_of_jail.png"
-//     alt="image"
-//     className="object-cover w-full h-full"
-//   />
-// </div>
-// <div className="p-6">
-//   <h1 className="font-bold">Top 10 way to Earn Money</h1>
-//   <p>
-//     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-//     Sapiente eligendi ad porro ullam ipsam ratione!
-//   </p>
-//   <p className="font-semibold my-2">Publisher : Polash</p>
-//   <Link>
-//     <button className="bg-black text-white py-2 px-4 rounded-md">
-//       View Details..
-//     </button>
-//   </Link>
-// </div>
-// </div>
-// <div className="relative border flex w-full lg:h-[210px] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
-// <div className="relative w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-r-none shrink-0 rounded-xl bg-clip-border">
-//   <img
-//     src="https://tds-images.thedailystar.net/sites/default/files/styles/big_201/public/images/2023/11/20/khadijatul_kubra_finally_out_of_jail.png"
-//     alt="image"
-//     className="object-cover w-full h-full"
-//   />
-// </div>
-// <div className="p-6">
-//   <h1 className="font-bold">Top 10 way to Earn Money</h1>
-//   <p>
-//     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-//     Sapiente eligendi ad porro ullam ipsam ratione!
-//   </p>
-//   <p className="font-semibold my-2">Publisher : Polash</p>
-//   <Link>
-//     <button className="bg-black text-white py-2 px-4 rounded-md">
-//       View Details..
-//     </button>
-//   </Link>
-// </div>
-// </div>
-// <div className="relative border flex w-full lg:h-[210px] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
-// <div className="relative w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-r-none shrink-0 rounded-xl bg-clip-border">
-//   <img
-//     src="https://tds-images.thedailystar.net/sites/default/files/styles/big_201/public/images/2023/11/20/khadijatul_kubra_finally_out_of_jail.png"
-//     alt="image"
-//     className="object-cover w-full h-full"
-//   />
-// </div>
-// <div className="p-6">
-//   <h1 className="font-bold">Top 10 way to Earn Money</h1>
-//   <p>
-//     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-//     Sapiente eligendi ad porro ullam ipsam ratione!
-//   </p>
-//   <p className="font-semibold my-2">Publisher : Polash</p>
-//   <Link>
-//     <button className="bg-black text-white py-2 px-4 rounded-md">
-//       View Details..
-//     </button>
-//   </Link>
-// </div>
-// </div>

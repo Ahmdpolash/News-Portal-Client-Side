@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ArticleCard = ({ article, isLoading }) => {
-
-  const {description} = article
+  const { description } = article;
 
   const sliceDesc = description.split(" ").slice(0, 35).join(" ");
 
@@ -25,7 +24,8 @@ const ArticleCard = ({ article, isLoading }) => {
             {article?.title}
           </h4>
           <p className="block mb-2 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-            {sliceDesc}<span className="font-bold">...</span>
+            {sliceDesc}
+            <span className="font-bold">...</span>
           </p>
           <a className="inline-block" href="#">
             <button

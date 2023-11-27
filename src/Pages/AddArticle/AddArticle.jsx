@@ -29,6 +29,7 @@ const AddArticle = () => {
     { value: "Fashion", label: "Fashion" },
     { value: "Travel", label: "Travel" },
     { value: "Politics", label: "Politics" },
+    { value: "Education", label: "Education" },
   ];
 
   const Diagnose = (e) => {

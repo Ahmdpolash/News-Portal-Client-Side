@@ -75,7 +75,7 @@ const AdminArticle = () => {
           <Lottie className="w-[210px]" animationData={loader} />
         </div>
       ) : (
-        <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
+        <table className="ml-52 min-w-full divide-y divide-gray-200 overflow-x-auto">
           <thead className="bg-gray-50">
             <tr>
               <th
