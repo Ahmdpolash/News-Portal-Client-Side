@@ -15,6 +15,7 @@ import AdminArticle from "../Pages/Dashboard/AdminArticle/AdminArticle";
 import Profile from "../Pages/Profile/Profile";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import PrivateRoute from "../Router/PrivateRoute";
+import MyProfile from "../Pages/MyProfile/MyProfile";
 
 const Route = createBrowserRouter([
   {
@@ -55,7 +56,7 @@ const Route = createBrowserRouter([
         path: "/profile",
         element: (
           <PrivateRoute>
-            <Profile />
+            <MyProfile />
           </PrivateRoute>
         ),
       },

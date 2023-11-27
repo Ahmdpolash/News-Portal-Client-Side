@@ -70,7 +70,7 @@ const AllArticle = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 my-10 ">
           {articles?.map((article) => (
-            <ArticleCard key={article._id} isLoading={isLoading} article={article} />
+            <ArticleCard key={article._id} article={article} />
           ))}
         </div>
       </Container>

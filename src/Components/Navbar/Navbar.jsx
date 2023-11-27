@@ -4,12 +4,13 @@ import useAuth from "../../Hooks/useAuth";
 import { FaSignOutAlt } from "react-icons/fa";
 import logo from "../../assets/logo.png";
 import useAdmin from "../../Hooks/useAdmin";
+import loader from "../../assets/loaders.json";
+import Lottie from "lottie-react";
 
 const Navbar = () => {
-  
   const { user, logOut } = useAuth();
 
-  const { isAdmin,isLoading } = useAdmin();
+  const { isAdmin, isLoading } = useAdmin();
 
   const handleLogOut = () => {
     logOut();
@@ -17,7 +18,11 @@ const Navbar = () => {
 
   return (
     <div>
-      {isLoading && <p>Loading...</p>}
+      {/* {isLoading && (
+        <div className="flex items-center h-[4vh] justify-center">
+          <Lottie className="w-[140px]" animationData={loader} />
+        </div>
+      )} */}
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700">
         <nav
           className="relative max-w-8xl w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-16"
@@ -120,9 +125,11 @@ const Navbar = () => {
 
               {user ? (
                 <>
-                  <span className="inline-block h-[2.875rem] w-[2.875rem] bg-gray-100 rounded-full overflow-hidden">
-                    <img className="" src={user?.photoURL} alt="" />
-                  </span>
+                  <Link to="/profile">
+                    <span className="inline-block h-[2.875rem] w-[2.875rem] bg-gray-100 rounded-full overflow-hidden">
+                      <img className="" src={user?.photoURL} alt="" />
+                    </span>
+                  </Link>
 
                   <button
                     onClick={handleLogOut}

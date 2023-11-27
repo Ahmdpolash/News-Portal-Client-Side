@@ -67,7 +67,6 @@ const AddArticle = () => {
         time,
         status: "pending",
       };
-      console.log(data);
       const result = await axiosPublic.post("/articles", data);
       console.log(result.data);
       if (result.data.insertedId) {

@@ -3,6 +3,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useArticle from "../../Hooks/useArticle";
+import toast from "react-hot-toast";
 
 const style = {
   position: "absolute",
@@ -16,7 +19,32 @@ const style = {
   p: 4,
 };
 
-const Modals = ({ open, handleClose }) => {
+const Modals = ({ open, handleClose, article }) => {
+  const axiosPublic = useAxiosPublic();
+  //   const { articles } = useArticle
+
+  //   console.log("article", article);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const message = form.message.value;
+    console.log(message);
+
+    const data = {
+      article_id: article._id,
+      decline_message: message,
+      email: article?.email,
+    };
+
+    console.log(data);
+    axiosPublic.post("/declines", data).then((res) => {
+      if (res.data.insertedId) {
+        toast.success("FeedBack Successfully Added");
+      }
+    });
+  };
+
   return (
     <div>
       <Modal
@@ -26,12 +54,24 @@ const Modals = ({ open, handleClose }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <h1 className="font-semibold mb-2">Feedback</h1>
+          <form onSubmit={handleSubmit}>
+            <textarea
+              className="border-2 border-black w-full"
+              name="message"
+              id=""
+              cols="30"
+              rows="5"
+            ></textarea>
+
+            <button
+              
+              type="submit"
+              className="bg-black px-6 py-2 rounded-md text-white mt-2"
+            >
+              Submit
+            </button>
+          </form>
         </Box>
       </Modal>
     </div>

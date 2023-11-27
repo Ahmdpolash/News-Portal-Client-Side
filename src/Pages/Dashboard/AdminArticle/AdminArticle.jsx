@@ -8,16 +8,19 @@ import Lottie from "lottie-react";
 import loader from "../../../assets/loaders.json";
 
 import Modals from "../../../Components/Modal/Modal";
+import toast from "react-hot-toast";
 
 const AdminArticle = () => {
   const axiosPublic = useAxiosPublic();
   const [articles, refetch, isLoading] = useArticle();
 
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleDelete = (id) => {
+    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -43,14 +46,20 @@ const AdminArticle = () => {
   };
 
   const handleApprove = (id) => {
-    axiosPublic.patch(`/articles/${id}`).then((res) => {
+    axiosPublic.patch(`/articles/${id}`, { status: "approve" }).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        refetch();
+      }
       console.log(res.data);
     });
   };
 
   const handlePremium = (id) => {
     axiosPublic.patch(`/articles/premium/${id}`).then((res) => {
-      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        toast.success("This Article is now Premium");
+      }
     });
   };
 
@@ -148,15 +157,25 @@ const AdminArticle = () => {
 
                 <td className="px-6  py-4 whitespace-nowrap text-sm text-gray-500">
                   <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                    <button onClick={() => handleApprove(article?._id)}>
-                      Approve
-                    </button>
+                    {article?.status === "approve" ? (
+                      "approved"
+                    ) : (
+                      <button onClick={() => handleApprove(article?._id)}>
+                        Approve
+                      </button>
+                    )}
                   </a>
                   <a
                     href="#"
                     className="ml-2 text-red-600 text-center hover:text-red-900"
                   >
-                    <button onClick={() => handleOpen()}>Decline</button>
+                    {article?.decline_message ? (
+                      <p>Declined</p>
+                    ) : (
+                      <button onClick={() => handleOpen(article._id)}>
+                        Decline
+                      </button>
+                    )}
                   </a>
                 </td>
 
@@ -173,16 +192,17 @@ const AdminArticle = () => {
                     )}
                   </a>
                   <a href="#" className="ml-2 text-red-600 hover:text-red-900">
-                    <button onClick={() => handleDelete(article?._id)}>
-                      Delete
-                    </button>
+                    <button onClick={() => handleDelete(article?._id)}>Delete</button>
                   </a>
                 </td>
+                <Modals
+                  open={open}
+                  article={article}
+                  handleClose={handleClose}
+                />
               </tr>
             ))}
           </tbody>
-
-          <Modals open={open} handleClose={handleClose} />
         </table>
       )}
     </div>
