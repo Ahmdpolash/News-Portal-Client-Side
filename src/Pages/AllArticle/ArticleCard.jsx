@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ArticleCard = ({ article, isLoading }) => {
   const { description } = article;
 
-  const sliceDesc = description.split(" ").slice(0, 35).join(" ");
+  const sliceDesc = description.split(" ").slice(0, 30).join(" ");
 
   return (
     <div>
