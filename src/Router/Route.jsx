@@ -16,6 +16,8 @@ import Profile from "../Pages/Profile/Profile";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import PrivateRoute from "../Router/PrivateRoute";
 import MyProfile from "../Pages/MyProfile/MyProfile";
+import Update from "../Pages/Update/Update";
+import Details from "../Pages/Details/Details";
 
 const Route = createBrowserRouter([
   {
@@ -59,6 +61,26 @@ const Route = createBrowserRouter([
             <MyProfile />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <PrivateRoute>
+            <Update />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/articles/update/${params.id}`),
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivateRoute>
+            <Details />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/details/${params.id}`),
       },
     ],
   },
