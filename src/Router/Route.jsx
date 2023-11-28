@@ -19,6 +19,8 @@ import MyProfile from "../Pages/MyProfile/MyProfile";
 import Update from "../Pages/Update/Update";
 import Details from "../Pages/Details/Details";
 import Premium from "../Pages/Premium/Premium";
+import Subscription from "../Pages/Subcription/Subscription";
+import PayNow from "../Pages/Payment/PayNow";
 
 const Route = createBrowserRouter([
   {
@@ -85,10 +87,25 @@ const Route = createBrowserRouter([
       },
       {
         path: "/premium",
-        element: <Premium />,
+        element: (
+          <PrivateRoute>
+            <Premium />
+          </PrivateRoute>
+        ),
       },
+      {
+        path: "/subscription",
+        element: (
+          <PrivateRoute>
+            <Subscription />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path:'/payment',
+        element:<PayNow/>
+      }
     ],
-    
   },
   {
     path: "/login",

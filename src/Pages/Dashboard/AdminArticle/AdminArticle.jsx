@@ -172,7 +172,7 @@ const AdminArticle = () => {
                     {article?.decline_message ? (
                       <p>Declined</p>
                     ) : (
-                      <button onClick={() => handleOpen(article._id)}>
+                      <button onClick={() => handleOpen()}>
                         Decline
                       </button>
                     )}

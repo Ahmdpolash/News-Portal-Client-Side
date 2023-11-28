@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import {
   AiFillTrademarkCircle,
@@ -16,6 +16,7 @@ import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import Swal from "sweetalert2";
 
 const MyArticle = () => {
+  const [decline, setDecline] = useState();
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
 
@@ -54,6 +55,19 @@ const MyArticle = () => {
       }
     });
   };
+
+  useEffect(() => {
+    axiosPublic.get("/declines").then((res) => {
+      // console.log(res.data);
+
+      setDecline(res.data);
+    });
+  }, []);
+
+  const filter = articles?._id === decline?._id;
+
+  console.log('bal',filter);
+
 
   return (
     <div className="">
@@ -136,7 +150,9 @@ const MyArticle = () => {
                         <IoIosCheckmarkCircleOutline className="text-bold text-xl" />{" "}
                       </p>
                     ) : (
-                      <button className="font-bold text-red-400">pending</button>
+                      <button className="font-bold text-red-400">
+                        pending
+                      </button>
                     )}
                   </td>
                   <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">

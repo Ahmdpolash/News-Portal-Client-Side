@@ -55,6 +55,7 @@ const Modals = ({ open, handleClose, article }) => {
       >
         <Box sx={style}>
           <h1 className="font-semibold mb-2">Feedback</h1>
+          <button onClick={()=> handleClose()} className="absolute text-2xl font-bold right-3 text-red-400 top-1">X</button>
           <form onSubmit={handleSubmit}>
             <textarea
               className="border-2 border-black w-full"
@@ -65,7 +66,6 @@ const Modals = ({ open, handleClose, article }) => {
             ></textarea>
 
             <button
-              
               type="submit"
               className="bg-black px-6 py-2 rounded-md text-white mt-2"
             >

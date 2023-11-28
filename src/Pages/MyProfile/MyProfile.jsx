@@ -13,9 +13,12 @@ const MyProfile = () => {
       <Container>
         <div className="flex bg-gray-50 justify-center items-center h-[85vh]">
           <div className="w-96 relative px-14 py-16 text-center bg-gray-300 rounded-lg lg:mt-0 xl:px-10">
-          <div className="absolute right-2 top-2">
-            <FaEdit className="text-2xl text-red-600"/>
-          </div>
+            <div className="absolute right-2 top-2">
+              <button>
+                <FaEdit className="text-2xl text-red-600" />
+              </button>
+            </div>
+
             <div className="space-y-4 xl:space-y-6">
               <img
                 className="mx-auto rounded-full h-28 lg:h-36 lg:w-36"

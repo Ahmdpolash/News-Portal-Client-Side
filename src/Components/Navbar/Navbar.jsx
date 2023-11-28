@@ -69,49 +69,53 @@ const Navbar = () => {
             className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
           >
             <div className="flex text-[16px] flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 lg:gap-x-7 sm:gap-x-3 sm:mt-0 sm:ps-7">
-              <Link to="/">
+              <NavLink to="/">
                 <a
-                  className=" text-red-400 font-bold sm:py-6 dark:text-blue-500"
+                  className=" font-bold sm:py-6 dark:text-blue-500"
                   aria-current="page"
                 >
                   Home
                 </a>
-              </Link>
-              <Link
-                to="/addArticle"
-                className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                href="#"
-              >
-                Add Article
-              </Link>
-              <Link
-                to="/allArticle"
-                className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                href="#"
-              >
-                All Article
-              </Link>
-              <Link
-                to="/subscription"
-                className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                href="#"
-              >
-                Subscription
-              </Link>
-              <Link
-                to="/premium"
-                className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                href="#"
-              >
-                Premium Articles
-              </Link>
-              <Link
-                to="/myArticle"
-                className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                href="#"
-              >
-                My Article
-              </Link>
+              </NavLink>
+              {!user ? "" : (
+                <>
+                  <Link
+                    to="/addArticle"
+                    className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                    href="#"
+                  >
+                    Add Article
+                  </Link>
+                  <Link
+                    to="/allArticle"
+                    className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                    href="#"
+                  >
+                    All Article
+                  </Link>
+                  <Link
+                    to="/subscription"
+                    className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                    href="#"
+                  >
+                    Subscription
+                  </Link>
+                  <Link
+                    to="/premium"
+                    className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                    href="#"
+                  >
+                    Premium Articles
+                  </Link>
+                  <Link
+                    to="/myArticle"
+                    className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                    href="#"
+                  >
+                    My Article
+                  </Link>
+                </>
+              )}
 
               {isAdmin && (
                 <Link
