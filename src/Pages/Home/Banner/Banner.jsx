@@ -2,8 +2,11 @@ import React from "react";
 import Container from "../../Shared/Container/Container";
 import Marquee from "react-fast-marquee";
 import Carousel from "./Carousel";
+import useArticle from "../../../Hooks/useArticle";
 
 const Banner = () => {
+  const [articles] = useArticle();
+
   return (
     <div>
       <Container>
@@ -26,57 +29,23 @@ const Banner = () => {
           </div>
           <div className="rounded-md p-4 bg-gray-100">
             <h1 className="mb-2 font-bold">Trending</h1>
-            <div className="border-2 shadow-lg mb-3 p-4 rounded-lg">
-              <div className="flex gap-2 ">
-                <div className="w-[250px] h-[100px]">
+
+            {articles?.slice(0, 3).map((article) => (
+              <div className="border-2 shadow-lg mb-3 relative p-4 rounded-lg">
+                <div className="flex gap-2 ">
                   <img
-                    className="w-full h-full rounded-lg"
-                    src="https://tds-images.thedailystar.net/sites/default/files/styles/big_201/public/images/2023/11/20/khadijatul_kubra_finally_out_of_jail.png"
+                    className="w-[180px] rounded-lg"
+                    src={article?.image}
                     alt=""
                   />
-                </div>
-                <div>
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Vero, deleniti.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="border-2 shadow-lg mb-3 p-4 rounded-lg">
-              <div className="flex gap-2 ">
-                <div className="w-[250px] h-[100px]">
-                  <img
-                    className="w-full h-full rounded-lg"
-                    src="https://media.cnn.com/api/v1/images/stellar/prod/231122093931-05-argentina-brazil-112123.jpg?c=16x9&q=h_720,w_1280,c_fill"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Vero, deleniti.
-                  </p>
+
+                  <div>
+                    <p>{article?.title}.</p>
+                    <p className="absolute bottom-2 font-semibold text-gray-500"> {article?.publisher}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="border-2 shadow-lg mb-3 p-4 rounded-lg">
-              <div className="flex gap-2 ">
-                <div className="w-[250px] h-[100px]">
-                  <img
-                    className="w-full h-full rounded-lg"
-                    src="https://tds-images-bn.thedailystar.net/sites/default/files/styles/big_202/public/images/2023/11/24/palestine.jpg"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Vero, deleniti.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </Container>

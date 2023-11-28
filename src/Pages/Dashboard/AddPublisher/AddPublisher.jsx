@@ -3,6 +3,7 @@ import animation from "../../../assets/animation.json";
 import Lottie from "lottie-react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -40,6 +41,10 @@ const AddPublisher = () => {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Daily News | Add New Publisher</title>
+      </Helmet>
       <div className=" bg-gray-50 flex flex-col justify-center py-5 sm:px-6 lg:px-8 px-6">
         <Lottie className="w-40 mx-auto" animationData={animation}></Lottie>
         <div className="sm:mx-auto sm:w-full sm:max-w-md">

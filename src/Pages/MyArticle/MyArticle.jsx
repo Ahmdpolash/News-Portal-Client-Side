@@ -136,7 +136,7 @@ const MyArticle = () => {
                         <IoIosCheckmarkCircleOutline className="text-bold text-xl" />{" "}
                       </p>
                     ) : (
-                      <button>Decline</button>
+                      <button className="font-bold text-red-400">pending</button>
                     )}
                   </td>
                   <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">

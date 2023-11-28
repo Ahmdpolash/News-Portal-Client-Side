@@ -2,6 +2,7 @@ import React from "react";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import Container from "../../Shared/Container/Container";
 
 const Publisher = () => {
   const axiosPublic = useAxiosPublic();
@@ -16,38 +17,20 @@ const Publisher = () => {
   });
 
   return (
-    <div className="my-8">
-      <h1 className="font-semibold text-3xl my-2 text-center">
-        Our Article Publisher
-      </h1>
-      <div className="h-1 w-20 bg-black text-center mx-auto"></div>
+    <Container>
+      <div className="my-8">
+        <h1 className="font-semibold text-3xl my-2 text-center">
+          Our Article Publisher
+        </h1>
+        <div className="h-1 w-20 bg-black text-center mx-auto"></div>
 
-      <div className="flex justify-around flex-col lg:flex-row">
-        {/* {publishers?.map((publisher) => (
-          <h1></h1>
-        ))} */}
-        <img
-          className="w-[250px]"
-          src="https://i.ibb.co/y0Yv1Wd/daily-1.png"
-          alt=""
-        />
-        <img
-          className="w-[250px]"
-          src="https://i.ibb.co/9yFMbXc/daily-2-1.png"
-          alt=""
-        />
-        <img
-          className="w-[250px]"
-          src="https://i.ibb.co/kS2hcCH/daily-3-1.png"
-          alt=""
-        />
-        <img
-          className="w-[250px]"
-          src="https://i.ibb.co/vsbxWwd/daily-4-1.png"
-          alt=""
-        />
+        <div className="flex justify-between flex-col lg:flex-row">
+          {publishers?.map((publisher) => (
+            <img className="w-[100px]" src={publisher?.image} alt="" />
+          ))}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

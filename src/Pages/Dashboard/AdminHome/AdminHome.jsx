@@ -1,10 +1,15 @@
 import React from "react";
 import Charts from "./chart";
 import Line from "./Line";
+import { Helmet } from "react-helmet";
 
 const AdminHome = () => {
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Daily News | Dashboard Home</title>
+      </Helmet>
       <div className="bg-gray-200 h-screen">
         <div className="grid gap-4 w-full lg:gap-8 md:grid-cols-3 p-8 pt-6">
           <div className="relative p-6 rounded-2xl bg-white shadow dark:bg-gray-800">
@@ -82,7 +87,7 @@ const AdminHome = () => {
         </div>
 
         <div className="grid grid-cols-1  lg:grid-cols-2 gap-3">
-          <Line/>
+          <Line />
           <Charts />
         </div>
       </div>

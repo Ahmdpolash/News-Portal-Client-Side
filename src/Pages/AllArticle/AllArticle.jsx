@@ -5,10 +5,12 @@ import Container from "../Shared/Container/Container";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
+import { useState } from "react";
 
 const AllArticle = () => {
   const axiosPublic = useAxiosPublic();
-
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
   const { data: articles = [], isLoading } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
@@ -32,17 +34,19 @@ const AllArticle = () => {
               className="border-2 rounded-md border-red-400 text-red-600 py-1 lg:px-4"
               name="tags"
               id=""
+              onChange={(e) => setSort(e.target.value)}
             >
-              <option value="Sport">Sport</option>
-              <option value="Technology">Technology</option>
-              <option value="Fashion">Fashion</option>
-              <option value="Travel">Travel</option>
-              <option value="Politics">Politics</option>
+              <option value="Sport">Alokito Bangladesh</option>
+              <option value="Technology">The Daily Star</option>
+              <option value="Fashion">Manab Zamin</option>
+              <option value="Travel">Prothom Alo</option>
+              <option value="Politics">Shamakal</option>
             </select>
           </div>
 
           <div className="w-full flex md:w-[60%] lg:w-[30%] ">
             <input
+              onChange={(e) => setSearch(e.target.value)}
               className="border-2 w-[80%] lg:w-72 border-red-400 outline-none px-3 lg:px-16 py-2 rounded-none lg:rounded-l-md"
               placeholder="Search Title Here.."
               type="text"
@@ -68,11 +72,19 @@ const AllArticle = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 my-10 ">
-          {articles?.map((article) => (
+          {articles.filter((article) => {
+              return !search
+                ? article
+                : article?.title.toLowerCase().includes(search.toLowerCase())
+            })
+            .map((article) => (
+              <ArticleCard key={article?._id} article={article} />
+            ))}
+
+          {/* {articles?.map((article) => (
             <ArticleCard key={article._id} article={article} />
-          ))}
+          ))} */}
         </div>
-        {/* </InfiniteScroll> */}
       </Container>
     </div>
   );

@@ -4,6 +4,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet";
 // import { colorOptions } from "../data";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -57,13 +58,13 @@ const AddArticle = () => {
 
     if (res.data.success) {
       const data = {
-        title,   
+        title,
         tag,
         description,
         publisher,
         email: user?.email,
         authors_name: user?.displayName,
-        authors_image:user?.photoURL,
+        authors_image: user?.photoURL,
         image: res.data.data.display_url,
         time,
         status: "pending",
@@ -79,6 +80,10 @@ const AddArticle = () => {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Daily News | Add Article</title>
+      </Helmet>
       <div className="bg-white p-4">
         <form
           onSubmit={handleAddArticle}
@@ -160,7 +165,7 @@ const AddArticle = () => {
               </label>
 
               <Select
-              required
+                required
                 multiple="multiple"
                 options={options}
                 onChange={Diagnose}

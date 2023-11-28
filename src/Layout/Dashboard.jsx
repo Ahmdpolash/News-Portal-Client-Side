@@ -3,10 +3,17 @@ import { FaEdit, FaUser } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { FiCornerLeftUp } from "react-icons/fi";
 import logo from "../assets/logo.png";
+import { FaArrowRightFromBracket } from "react-icons/fa6";
 
 import "./Dash.css";
+import useAuth from "../Hooks/useAuth";
 
 const Dashboard = () => {
+  const { logOut } = useAuth();
+  const handleLogOut = () => {
+    logOut();
+  };
+
   return (
     <div>
       <div className="flex flex-col lg:flex-row">
@@ -74,58 +81,57 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
 
-                <li className="hs-accordion" id="users-accordion">
-                  <NavLink to="/dashboard/allUsers">
-                    <button
-                      type="button"
-                      className="hs-accordion-toggle hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 "
+                <li id="nav" className="hs-accordion">
+                  <NavLink
+                    to="/dashboard/allUsers"
+                    className="flex w-full items-center font-semibold gap-x-3.5 py-2 px-2.5  text-sm rounded-lg hover:bg-gray-100 "
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     >
-                      <svg
-                        className="w-4 h-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                        <circle cx="9" cy="7" r="4" />
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                      </svg>
-                      All Users
-                    </button>
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    All Users
                   </NavLink>
                 </li>
-                <li className="hs-accordion" id="users-accordion">
-                  <NavLink to="/dashboard/adminArticle">
-                    <button
-                      type="button"
-                      className="hs-accordion-toggle hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 "
-                    >
-                      <FaEdit />
-                      All Article
-                    </button>
+                <li id="nav" className="hs-accordion">
+                  <NavLink
+                    to="/dashboard/adminArticle"
+                    className="flex w-full items-center font-semibold gap-x-3.5 py-2 px-2.5  text-sm rounded-lg hover:bg-gray-100 "
+                  >
+                    <FaEdit />
+                    All Article
                   </NavLink>
                 </li>
 
-                <li className="hs-accordion" id="users-accordion">
-                  <NavLink to="/dashboard/publisher">
-                    <button
-                      type="button"
-                      className="hs-accordion-toggle  hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 "
-                    >
-                      <FaUser />
-                      Add Publisher
-                    </button>
+                <li className="hs-accordion" id="nav">
+                  <NavLink
+                    className="flex w-full items-center font-semibold gap-x-3.5 py-2 px-2.5  text-sm rounded-lg hover:bg-gray-100 "
+                    to="/dashboard/publisher"
+                  >
+                    <FaUser />
+                    Add Publisher
                   </NavLink>
                 </li>
 
-                <button className="absolute bottom-5">Sign Out</button>
+                <button
+                  onClick={handleLogOut}
+                  className="absolute bg-black text-white px-4 font-bold py-2 rounded-md bottom-5 flex items-center gap-3"
+                >
+                  Sign Out <FaArrowRightFromBracket />{" "}
+                </button>
               </ul>
             </nav>
           </div>

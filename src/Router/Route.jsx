@@ -18,6 +18,7 @@ import PrivateRoute from "../Router/PrivateRoute";
 import MyProfile from "../Pages/MyProfile/MyProfile";
 import Update from "../Pages/Update/Update";
 import Details from "../Pages/Details/Details";
+import Premium from "../Pages/Premium/Premium";
 
 const Route = createBrowserRouter([
   {
@@ -82,7 +83,12 @@ const Route = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/details/${params.id}`),
       },
+      {
+        path: "/premium",
+        element: <Premium />,
+      },
     ],
+    
   },
   {
     path: "/login",
