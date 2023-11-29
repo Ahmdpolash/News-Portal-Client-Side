@@ -10,7 +10,7 @@ const ArticleCard = ({ article, isLoading }) => {
 
   return (
     <div>
-      <div className="relative flex flex-col lg:flex-row w-full max-w-[48rem] lg:h-[300px] rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+      <div className="relative border-2 flex flex-col lg:flex-row w-full max-w-[48rem] lg:h-[300px] rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
         <div className="relative w-full lg:w-2/5 m-0 overflow-hidden  text-gray-700 bg-white rounded-r-none shrink-0 rounded-xl bg-clip-border">
           <img
             src={article?.image}
@@ -18,6 +18,7 @@ const ArticleCard = ({ article, isLoading }) => {
             className="object-cover w-full h-full"
           />
         </div>
+
         <div className="p-4">
           {article?.Quality === "premium" && (
             <Lottie

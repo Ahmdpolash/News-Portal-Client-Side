@@ -2,8 +2,15 @@ import React from "react";
 import CountUp from "react-countup";
 import Container from "../../Shared/Container/Container";
 import { FaUsers } from "react-icons/fa";
+import useUser from "../../../Hooks/useUser";
 
 const Statistic = () => {
+
+  const [user] = useUser();
+
+
+
+
   return (
     <Container>
       <div>
@@ -17,7 +24,7 @@ const Statistic = () => {
             </h4>
             <p className="sm:mt-3 flex items-center gap-3 text-xl sm:text-3xl text-center font-bold text-blue-600">
               <FaUsers />
-              <CountUp delay={0.5} end={554200} />
+              <CountUp delay={0.5} end={user?.length} />
               <span>+</span>
             </p>
           </div>
@@ -40,7 +47,6 @@ const Statistic = () => {
             </p>
           </div>
         </div>
-        
       </div>
     </Container>
   );

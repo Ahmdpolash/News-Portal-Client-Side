@@ -29,7 +29,7 @@ const AddArticle = () => {
     { value: "Sport", label: "Sport" },
     { value: "Fashion", label: "Fashion" },
     { value: "Travel", label: "Travel" },
-    { value: "Politics", label: "Politics" },
+    { value: "Business", label: "Business" },
     { value: "Education", label: "Education" },
   ];
 

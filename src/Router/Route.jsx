@@ -102,9 +102,9 @@ const Route = createBrowserRouter([
         ),
       },
       {
-        path:'/payment',
-        element:<PayNow/>
-      }
+        path: "/payment/:id",
+        element: <PayNow />,
+      },
     ],
   },
   {

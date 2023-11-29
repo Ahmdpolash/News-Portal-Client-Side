@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Container from "../Shared/Container/Container";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import { useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import premium from "../../assets/premium.json";
+import Lottie from "lottie-react";
 
 const AllArticle = () => {
+  const [dataSource, setDataSource] = useState(Array.from({ length: 4 }));
+  const [hasMore, setHasMore] = useState(true);
+
+  const fetchData = () => {
+    if (dataSource.length < articles.length) {
+      setTimeout(() => {
+        setDataSource(dataSource.concat(Array.from({ length: 4 })));
+      }, 1000);
+    } else {
+      setHasMore(false);
+    }
+  };
+
   const axiosPublic = useAxiosPublic();
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
@@ -15,18 +31,34 @@ const AllArticle = () => {
     queryKey: ["articles"],
     queryFn: async () => {
       const res = await axiosPublic.get("/article/approve");
+
       console.log(res.data);
       return res.data; // Add this line to return the data
     },
   });
 
-  return (
-    <div className="bg-gray-100">
-      <Helmet>
-        <title>Daily News | All Article</title>
-      </Helmet>
+  const [searchInput, setSearchInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
-      <Container>
+  // const handleSearchInput = (event) => {
+  //   const searchValue = event.target.value;
+  //   setSearchInput(searchValue);
+
+  //   // Filter the articles based on the search input
+  //   const filtered = articles.filter((article) =>
+  //     article.title.toLowerCase().includes(searchValue.toLowerCase())
+  //   );
+
+  //   setSearchResults(filtered);
+  // };
+
+  return (
+    <div>
+      <Container className="bg-gray-50">
+        <Helmet>
+          <title>Daily News | All Article</title>
+        </Helmet>
+
         <div className="flex flex-col md:flex-row lg:flex-row flex-wrap justify-between lg:items-center gap-2">
           {/* <h3>Sort By</h3> */}
           <div>
@@ -71,20 +103,17 @@ const AllArticle = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 my-10 ">
-          {articles.filter((article) => {
-              return !search
-                ? article
-                : article?.title.toLowerCase().includes(search.toLowerCase())
-            })
-            .map((article) => (
-              <ArticleCard key={article?._id} article={article} />
+        <InfiniteScroll
+          dataLength={dataSource.length}
+          next={fetchData}
+          hasMore={hasMore}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 mt-6 gap-4">
+            {articles.slice(0, dataSource.length).map((article) => (
+              <ArticleCard article={article} />
             ))}
-
-          {/* {articles?.map((article) => (
-            <ArticleCard key={article._id} article={article} />
-          ))} */}
-        </div>
+          </div>
+        </InfiniteScroll>
       </Container>
     </div>
   );

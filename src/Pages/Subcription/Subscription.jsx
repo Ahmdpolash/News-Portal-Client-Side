@@ -14,8 +14,8 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import { Link } from "react-router-dom";
 
-
 const Subscription = () => {
+
   const [payment, setPayment] = useState();
 
   console.log(payment);
@@ -72,19 +72,19 @@ const Subscription = () => {
                 id=""
               >
                 <option value="15">1 Minute - $15</option>
-                <option value="30">1 Days -$50</option>
-                <option value="50">3 Days -$100</option>
+                <option value="50">1 Days -$50</option>
+                <option value="100">3 Days -$100</option>
               </select>
 
               <div className="flex justify-center mt-6">
-                <Link to='/payment'>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Checkout
-                  </button>
-                </Link>
+                {payment && (
+                  <Link to={`/payment/${payment}`}>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      Checkout
+                    </button>
+                  </Link>
+                )}
               </div>
-
-             
             </div>
           </div>
         </div>

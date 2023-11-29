@@ -1,5 +1,7 @@
 import React from "react";
 import { Chart } from "react-google-charts";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 export const data = [
   ["Task", "Hours per Day"],
@@ -15,6 +17,8 @@ export const options = {
   backgroundColor: "#E5E7EB",
 };
 const Charts = () => {
+  const axiosPublic = useAxiosPublic();
+
   return (
     <div>
       <Chart
