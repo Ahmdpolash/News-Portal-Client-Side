@@ -64,7 +64,7 @@ const Trending = () => {
                     .....
                   </p>
                   <p className="font-semibold my-2">Publisher : {article?.publisher}</p>
-                  <Link to={`/update/${article?._id}`}>
+                  <Link to={`/details/${article?._id}`}>
                     <button className="bg-black absolute bottom-3 text-white py-2 px-4 rounded-md">
                       View Details..
                     </button>

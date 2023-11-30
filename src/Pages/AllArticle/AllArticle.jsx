@@ -11,7 +11,6 @@ import premium from "../../assets/premium.json";
 import Lottie from "lottie-react";
 
 const AllArticle = () => {
-  
   const [dataSource, setDataSource] = useState(Array.from({ length: 4 }));
   const [hasMore, setHasMore] = useState(true);
 
@@ -19,7 +18,7 @@ const AllArticle = () => {
     if (dataSource.length < articles.length) {
       setTimeout(() => {
         setDataSource(dataSource.concat(Array.from({ length: 4 })));
-      }, 1000);
+      }, 300);
     } else {
       setHasMore(false);
     }
@@ -28,6 +27,7 @@ const AllArticle = () => {
   const axiosPublic = useAxiosPublic();
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+  const [tag, setTag] = useState("");
   const { data: articles = [], isLoading } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
@@ -37,21 +37,6 @@ const AllArticle = () => {
       return res.data; // Add this line to return the data
     },
   });
-
-  const [searchInput, setSearchInput] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
-  // const handleSearchInput = (event) => {
-  //   const searchValue = event.target.value;
-  //   setSearchInput(searchValue);
-
-  //   // Filter the articles based on the search input
-  //   const filtered = articles.filter((article) =>
-  //     article.title.toLowerCase().includes(searchValue.toLowerCase())
-  //   );
-
-  //   setSearchResults(filtered);
-  // };
 
   return (
     <div>
@@ -69,11 +54,12 @@ const AllArticle = () => {
               id=""
               onChange={(e) => setSort(e.target.value)}
             >
-              <option value="Sport">Alokito Bangladesh</option>
-              <option value="Technology">The Daily Star</option>
-              <option value="Fashion">Manab Zamin</option>
-              <option value="Travel">Prothom Alo</option>
-              <option value="Politics">Shamakal</option>
+              <option value="">Sort by Publisher</option>
+              <option value="Alokito Bangladesh">Alokito Bangladesh</option>
+              <option value="The Daily Star">The Daily Star</option>
+              <option value="Manab Zamin">Manab Zamin</option>
+              <option value="Prothom Alo">Prothom Alo</option>
+              <option value="Shamakal">Shamakal</option>
             </select>
           </div>
 
@@ -91,15 +77,17 @@ const AllArticle = () => {
 
           <div>
             <select
+              onChange={(e) => setTag(e.target.value)}
               className="border-2 hidden lg:block border-red-400 text-red-600 rounded-md py-1 px-4"
               name="tags"
               id=""
             >
+              <option value="">Filter by Tag</option>
               <option value="Sport">Sport</option>
               <option value="Technology">Technology</option>
               <option value="Fashion">Fashion</option>
               <option value="Travel">Travel</option>
-              <option value="Politics">Politics</option>
+              <option value="Politics">Education</option>
             </select>
           </div>
         </div>
@@ -108,11 +96,28 @@ const AllArticle = () => {
           dataLength={dataSource.length}
           next={fetchData}
           hasMore={hasMore}
+          style={{ overflow: "hidden" }}
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 mt-6 gap-4">
-            {articles.slice(0, dataSource.length).map((article) => (
-              <ArticleCard article={article} />
-            ))}
+            {articles
+              .filter((article) => {
+                // Filter articles based on the selected publisher
+                return !tag ||  article.tag.includes(tag)
+              })
+              .filter((article) => {
+                // Filter articles based on the selected publisher
+                return !sort || article.publisher === sort;
+              })
+
+              .filter((article) => {
+                return !search
+                  ? article
+                  : article.title.toLowerCase().includes(search.toLowerCase());
+              })
+              .slice(0, dataSource.length)
+              .map((article) => (
+                <ArticleCard article={article} />
+              ))}
           </div>
         </InfiniteScroll>
       </Container>

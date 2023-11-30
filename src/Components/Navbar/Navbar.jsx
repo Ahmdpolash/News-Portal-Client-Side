@@ -6,6 +6,7 @@ import logo from "../../assets/logo.png";
 import useAdmin from "../../Hooks/useAdmin";
 import loader from "../../assets/loaders.json";
 import Lottie from "lottie-react";
+import "../../Layout/Dash.css";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -69,7 +70,7 @@ const Navbar = () => {
             className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
           >
             <div className="flex text-[16px] flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 lg:gap-x-7 sm:gap-x-3 sm:mt-0 sm:ps-7">
-              <NavLink to="/">
+              <NavLink id="nav" to="/">
                 <a
                   className=" font-bold sm:py-6 dark:text-blue-500"
                   aria-current="page"
@@ -77,7 +78,9 @@ const Navbar = () => {
                   Home
                 </a>
               </NavLink>
-              {!user ? "" : (
+              {!user ? (
+                ""
+              ) : (
                 <>
                   <Link
                     to="/addArticle"

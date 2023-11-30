@@ -2,6 +2,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
+import Container from "../Shared/Container/Container";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_SECRET_KEY);
 const PayNow = () => {
@@ -9,13 +10,15 @@ const PayNow = () => {
   console.log(id);
 
   return (
-    <div className="my-12">
-      <div className="max-w-4xl mx-auto">
-        <Elements stripe={stripePromise}>
-          <CheckoutForm id={id}></CheckoutForm>
-        </Elements>
+    <Container>
+      <div className="my-12 bg-gray-50 h-[70vh]">
+        <div className="bg-base-300 rounded-xl lg:w-1/2  px-2 mb-3 text-white mx-auto">
+          <Elements stripe={stripePromise}>
+            <CheckoutForm id={id}></CheckoutForm>
+          </Elements>
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

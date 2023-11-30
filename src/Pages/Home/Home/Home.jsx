@@ -8,6 +8,8 @@ import ContactUs from "../Contact/ContactUs";
 import Footer from "../Footer/Footer";
 import Publisher from "../Publisher/Publisher";
 import { Helmet } from "react-helmet";
+import Latest from "../Latest/Latest";
+import Story from "../Latest/Story";
 
 const Home = () => {
   // const [showModal, setShowModal] = useState(false);
@@ -32,7 +34,6 @@ const Home = () => {
 
   return (
     <div>
-      
       <Helmet>
         <meta charSet="utf-8" />
         <title>Daily News |Home</title>
@@ -54,7 +55,9 @@ const Home = () => {
       <Banner />
       <Trending />
       <Statistic />
+      <Latest />
       <Plans />
+      <Story/>
       <Publisher />
       <ContactUs />
       <Footer />

@@ -8,5 +8,6 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("preline/plugin")],
+  plugins: [require("preline/plugin"), ],
+  plugins: [require("daisyui")],
 };

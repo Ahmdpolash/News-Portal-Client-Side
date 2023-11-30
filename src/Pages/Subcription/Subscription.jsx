@@ -14,13 +14,9 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import { Link } from "react-router-dom";
 
-
 import SubscriptionCard from "./SubscriptionCard";
 
 const Subscription = () => {
-
-
-
   return (
     <div>
       <Helmet>
@@ -63,8 +59,12 @@ const Subscription = () => {
 
         <div className="mx-auto">
           <SubscriptionCard />
-
         </div>
+
+
+
+        
+
         {/* <div>
          
         </div> */}

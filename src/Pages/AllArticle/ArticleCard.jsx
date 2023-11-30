@@ -50,6 +50,7 @@ const ArticleCard = ({ article, isLoading }) => {
           <h6 className="block mb-2 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-pink-500 uppercase">
             {article?.publisher}
           </h6>
+
           <h4 className="block mb-2 font-sans text-[17px] lg:text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
             {article?.title}
           </h4>
@@ -57,7 +58,7 @@ const ArticleCard = ({ article, isLoading }) => {
             {sliceDesc}
             <span className="font-bold">...</span>
           </p>
-          <a className="inline-block">
+          <a className=" flex justify-between">
             {article?.Quality ? (
               <>
                 {PremiumUsers?.premiumTaken ? (
@@ -134,6 +135,9 @@ const ArticleCard = ({ article, isLoading }) => {
                 </button>
               </Link>
             )}
+
+          <h3 className="text-red-600 absolute bottom-2 right-2 font-semibold text-[13px]">#{article?.tag}</h3>
+
           </a>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const CheckoutForm = ({ id }) => {
   console.log(id);
@@ -102,34 +103,43 @@ const CheckoutForm = ({ id }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <CardElement
-          options={{
-            style: {
-              base: {
-                fontSize: "16px",
-                color: "#424770",
-                "::placeholder": {
-                  color: "#aab7c4",
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Daily News | Payment</title>
+      </Helmet>
+      <div className="max-w-screen-xl md:w-96 mx-auto pt-12 items-center items center pb-4">
+        <form onSubmit={handleSubmit}>
+          <CardElement 
+          
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  padding: "15px",
+                  backgroundColor:'#fff',
+                  "::placeholder": {
+                    color: "#aab7c4",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
                 },
               },
-              invalid: {
-                color: "#9e2146",
-              },
-            },
-          }}
-        />
-        <button
-          className="my-3 bg-red-500 px-6 py-3 rounded-md text-white "
-          type="submit"
-          disabled={!stripe || !clientSecret}
-        >
-          Pay
-        </button>
+            }}
+          />
+          <button
+            className="my-3 bg-red-500 px-6 inline-flex py-3 mx-auto justify-center rounded-md text-white "
+            type="submit"
+            disabled={!stripe || !clientSecret}
+          >
+            Pay
+          </button>
 
-        <p className="text-red-600"> {error} </p>
-        {transactionId && <p className="text-green-600"> {transactionId} </p>}
-      </form>
+          <p className="text-red-600"> {error} </p>
+          {transactionId && <p className="text-green-600"> {transactionId} </p>}
+        </form>
+      </div>
     </div>
   );
 };
