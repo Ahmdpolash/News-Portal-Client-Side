@@ -3,11 +3,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import premiumIcon from "../../assets/premium.json";
 import { Helmet } from "react-helmet";
+import useUser from "../../Hooks/useUser";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import useAxios from "../../Hooks/useAxios";
+import useAuth from "../../Hooks/useAuth";
 
 const PremiumCard = ({ premium }) => {
   const { description } = premium;
-
+  const axiosSecure = useAxios();
+  const {user} = useAuth()
   const sliceDesc = description.split(" ").slice(0, 30).join(" ");
+
+  const handleError = () => {
+    toast.error("Please Take Subscription to Read This Article");
+  };
+
+  const { data: PremiumUsers = {} } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/premiumUser/${user.email}`);
+      console.log(res.data);
+      return res.data;
+    },
+  });
+
   return (
     <div>
       <Helmet>
@@ -40,9 +60,34 @@ const PremiumCard = ({ premium }) => {
             <span className="font-bold">...</span>
           </p>
           <a className="inline-block" href="#">
-            <Link to={`/details/${premium?._id}`}>
+            {PremiumUsers?.premiumTaken ? (
+               <Link to={`/details/${premium?._id}`}>
+               <button
+                 className=" bg-gray-100 : flex absolute bottom-4 items-center gap-2 px-2  font-sans text-xs font-bold text-center text-red-500 uppercase align-middle transition-all rounded-lg select-none hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                 type="button"
+               >
+                 View Details
+                 <svg
+                   xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   strokeWidth={2}
+                   stroke="currentColor"
+                   aria-hidden="true"
+                   className="w-4 h-4"
+                 >
+                   <path
+                     strokeLinecap="round"
+                     strokeLinejoin="round"
+                     d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                   />
+                 </svg>
+               </button>
+             </Link>
+            ) : (
               <button
-                className="flex absolute bottom-4 items-center gap-2 px-2  font-sans text-xs font-bold text-center text-red-500 uppercase align-middle transition-all rounded-lg select-none hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                onClick={handleError}
+                className="opacity-20 bg-gray-100 : flex absolute bottom-4 items-center gap-2 px-2  font-sans text-xs font-bold text-center text-red-500 uppercase align-middle transition-all rounded-lg select-none hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button"
               >
                 View Details
@@ -62,7 +107,7 @@ const PremiumCard = ({ premium }) => {
                   />
                 </svg>
               </button>
-            </Link>
+            )}
           </a>
         </div>
       </div>

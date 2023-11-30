@@ -73,7 +73,7 @@ const Route = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/articles/update/${params.id}`),
+          fetch(`https://daily-news-server-side.vercel.app/articles/update/${params.id}`),
       },
       {
         path: "/details/:id",
@@ -83,7 +83,7 @@ const Route = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/details/${params.id}`),
+          fetch(`https://daily-news-server-side.vercel.app/details/${params.id}`),
       },
       {
         path: "/premium",

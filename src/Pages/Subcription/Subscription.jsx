@@ -14,11 +14,12 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import { Link } from "react-router-dom";
 
+
+import SubscriptionCard from "./SubscriptionCard";
+
 const Subscription = () => {
 
-  const [payment, setPayment] = useState();
 
-  console.log(payment);
 
   return (
     <div>
@@ -44,7 +45,7 @@ const Subscription = () => {
           >
             <SwiperSlide>
               <img
-                className="w-full rounded-md lg:h-[42vh]"
+                className="w-full bg-blend-darken bg-slate-600 rounded-md lg:h-[42vh]"
                 src="https://img.freepik.com/premium-vector/breaking-news-information-banner-notifies-people-with-latest-news-banners-promotional-media_101434-770.jpg?w=1380"
                 alt=""
               />
@@ -60,34 +61,13 @@ const Subscription = () => {
           </Swiper>
         </div>
 
-        <div>
-          <div className="flex flex-col justify-center items-center min-h-screen">
-            <div className="bg-gray-100 rounded-lg shadow-lg p-16">
-              <h1 className="text-2xl font-bold mb-6">Make Payment</h1>
+        <div className="mx-auto">
+          <SubscriptionCard />
 
-              <select
-                className="w-full"
-                onChange={(e) => setPayment(e.target.value)}
-                name="payment"
-                id=""
-              >
-                <option value="15">1 Minute - $15</option>
-                <option value="50">1 Days -$50</option>
-                <option value="100">3 Days -$100</option>
-              </select>
-
-              <div className="flex justify-center mt-6">
-                {payment && (
-                  <Link to={`/payment/${payment}`}>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                      Checkout
-                    </button>
-                  </Link>
-                )}
-              </div>
-            </div>
-          </div>
         </div>
+        {/* <div>
+         
+        </div> */}
       </Container>
     </div>
   );

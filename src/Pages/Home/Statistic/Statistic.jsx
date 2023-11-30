@@ -5,12 +5,11 @@ import { FaUsers } from "react-icons/fa";
 import useUser from "../../../Hooks/useUser";
 
 const Statistic = () => {
-
   const [user] = useUser();
 
-
-
-
+  const normalUser = user?.filter((use) => !use.premiumTaken);
+  const premiumUser = user?.filter((use) => use.premiumTaken);
+  
   return (
     <Container>
       <div>
@@ -33,7 +32,7 @@ const Statistic = () => {
               Normal users
             </h4>
             <p className="sm:mt-3 text-xl sm:text-3xl text-center font-bold text-blue-600">
-              <CountUp delay={0.5} end={127200} />
+              <CountUp delay={0.5} end={normalUser?.length} />
               <span>+</span>
             </p>
           </div>
@@ -42,7 +41,7 @@ const Statistic = () => {
               Premium users
             </h4>
             <p className="sm:mt-3 text-xl sm:text-3xl text-center font-bold text-blue-600">
-              <CountUp delay={0.5} end={222000} />
+              <CountUp delay={0.5} end={premiumUser.length} />
               <span>+</span>
             </p>
           </div>

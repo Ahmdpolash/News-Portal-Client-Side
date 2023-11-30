@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useUser from "../../../Hooks/useUser";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
@@ -7,8 +7,16 @@ import loader from "../../../assets/loaders.json";
 import { Helmet } from "react-helmet";
 
 const AllUsers = () => {
+
   const [users, refetch, isLoading] = useUser();
   const axiosPublic = useAxiosPublic();
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 4; // You can adjust this number based on your preference
+
+  const indexOfLastUser = (currentPage + 1) * itemsPerPage;
+  const indexOfFirstUser = indexOfLastUser - itemsPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
   const handleMakeAdmin = async (user) => {
     const result = await axiosPublic.patch(`/users/admin/${user._id}`);
@@ -86,7 +94,7 @@ const AllUsers = () => {
             </thead>
 
             <tbody className="bg-white divide-y divide-gray-200">
-              {users?.map((user, index) => (
+              {currentUsers?.map((user, index) => (
                 <tr key={user._id}>
                   <td className="px-6 text-center py-4 whitespace-nowrap">
                     {index + 1}
@@ -134,6 +142,71 @@ const AllUsers = () => {
               ))}
             </tbody>
           </table>
+
+          <nav className="flex items-center justify-center ml- py-20 -space-x-px">
+            <button
+              type="button"
+              className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+              disabled={currentPage === 0}
+            >
+              <svg
+                className="flex-shrink-0 w-3.5 h-3.5"
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+              <span className="hidden sm:block">Previous</span>
+            </button>
+            {[...Array(Math.ceil(users.length / itemsPerPage)).keys()].map(
+              (page) => (
+                <button
+                  key={page}
+                  type="button"
+                  className={`min-h-[38px] min-w-[38px] flex justify-center items-center ${
+                    currentPage === page
+                      ? "bg-gray-200 text-gray-800"
+                      : "border border-gray-200 text-gray-800 hover:bg-gray-100"
+                  } py-2 px-3 text-sm first:rounded-s-lg last:rounded-e-lg focus:outline-none focus:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-600 dark:border-gray-700 dark:text-white dark:focus:bg-gray-500`}
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page + 1}
+                </button>
+              )
+            )}
+            <button
+              type="button"
+              className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+              disabled={indexOfLastUser >= users.length}
+            >
+              <span className="hidden sm:block">Next</span>
+              <svg
+                className="flex-shrink-0 w-3.5 h-3.5"
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </nav>
+
+          
         </div>
       )}
     </div>

@@ -19,14 +19,6 @@ const CheckoutForm = ({ id }) => {
 
   const axiosPublic = useAxiosPublic();
 
-  const { data: users = {} } = useQuery({
-    queryKey: [user.email, "users"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/users`);
-      return res.data;
-    },
-  });
-
   useEffect(() => {
     if (user?.email) {
       axiosPublic
@@ -38,7 +30,7 @@ const CheckoutForm = ({ id }) => {
           setClientSecret(res.data?.clientSecret);
         });
     }
-  }, [user.email]);
+  }, [user?.email]);
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -89,6 +81,7 @@ const CheckoutForm = ({ id }) => {
           premiumTaken: "true",
           transactionId: paymentIntent.id,
           amount: paymentIntent.amount,
+          time: Date.now(),
         };
         console.log(info);
 
@@ -127,7 +120,7 @@ const CheckoutForm = ({ id }) => {
           }}
         />
         <button
-          className="my-3 btn btn-sm btn-primary"
+          className="my-3 bg-red-500 px-6 py-3 rounded-md text-white "
           type="submit"
           disabled={!stripe || !clientSecret}
         >
@@ -142,8 +135,6 @@ const CheckoutForm = ({ id }) => {
 };
 
 export default CheckoutForm;
-
-// import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 // const CheckoutForm = () => {
 //   const stripe = useStripe();

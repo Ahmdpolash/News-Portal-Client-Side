@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "../../Shared/Container/Container";
+import { Link } from "react-router-dom";
 
 const Plans = () => {
   return (
@@ -141,13 +142,15 @@ const Plans = () => {
                   </li>
                 </ul>
                 <div className="mt-8">
-                  <a
-                    href="/login"
-                    className="inline-block w-full rounded-lg bg-gray-900 px-4 py-4 text-center text-sm font-semibold leading-5 text-white shadow-md hover:bg-white hover:text-gray-900 hover:ring-gray-900 hover:ring"
-                    aria-describedby="tier-team"
-                  >
-                    Get started today
-                  </a>
+                  <Link to="/subscription">
+                    <button
+                      href="/billing"
+                      className="inline-block w-full rounded-lg bg-gray-900 px-4 py-4 text-center text-sm font-semibold leading-5 text-white shadow-md hover:bg-white hover:text-gray-900 hover:ring-gray-900 hover:ring"
+                      aria-describedby="tier-team"
+                    >
+                      Get started today
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -285,13 +288,15 @@ const Plans = () => {
                   </li>
                 </ul>
                 <div className="mt-8">
-                  <a
-                    href="/billing"
-                    className="inline-block w-full rounded-lg bg-gray-900 px-4 py-4 text-center text-sm font-semibold leading-5 text-white shadow-md hover:bg-white hover:text-gray-900 hover:ring-gray-900 hover:ring"
-                    aria-describedby="tier-team"
-                  >
-                    Get started today
-                  </a>
+                  <Link to="/subscription">
+                    <button
+                      href="/billing"
+                      className="inline-block w-full rounded-lg bg-gray-900 px-4 py-4 text-center text-sm font-semibold leading-5 text-white shadow-md hover:bg-white hover:text-gray-900 hover:ring-gray-900 hover:ring"
+                      aria-describedby="tier-team"
+                    >
+                      Get started today
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -432,13 +437,15 @@ const Plans = () => {
                   </li>
                 </ul>
                 <div className="mt-8">
-                  <a
-                    href="/billing"
-                    className="inline-block w-full rounded-lg bg-gray-900 px-4 py-4 text-center text-sm font-semibold leading-5 text-white shadow-md hover:bg-white hover:text-gray-900 hover:ring-gray-900 hover:ring"
-                    aria-describedby="tier-team"
-                  >
-                    Get started today
-                  </a>
+                  <Link to="/subscription">
+                    <button
+                      href="/billing"
+                      className="inline-block w-full rounded-lg bg-gray-900 px-4 py-4 text-center text-sm font-semibold leading-5 text-white shadow-md hover:bg-white hover:text-gray-900 hover:ring-gray-900 hover:ring"
+                      aria-describedby="tier-team"
+                    >
+                      Get started today
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

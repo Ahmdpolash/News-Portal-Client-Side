@@ -1,5 +1,5 @@
 //! query api for get
-//http://localhost:5000/premium?Quality=premium
+//https://daily-news-server-side.vercel.app/premium?Quality=premium
 
 import React from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -7,11 +7,12 @@ import { useQuery } from "@tanstack/react-query";
 import useArticle from "../../Hooks/useArticle";
 import Container from "../Shared/Container/Container";
 import PremiumCard from "./PremiumCard";
+import useAxios from "../../Hooks/useAxios";
 
 const Premium = () => {
   //   const [articles] = useArticle();
 
-  const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxios();
   const { data: premiums = [], isLoading } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {

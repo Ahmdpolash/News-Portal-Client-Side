@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const axiosPublic = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://daily-news-server-side.vercel.app",
 });
 
 const useAxiosSecure = () => {
