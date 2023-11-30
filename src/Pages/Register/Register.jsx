@@ -67,6 +67,7 @@ const Register = () => {
         createUser(email, password).then(() => {
           profile(res.data.data.display_url, name).then((res) => {
             navigate("/");
+            toast.success('Registration Success')
           });
         });
       }

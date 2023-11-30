@@ -89,7 +89,13 @@ const AdminArticle = () => {
                 scope="col"
                 className="px-6 py-3  text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Author
+                Author Image
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3  text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+               Author Name
               </th>
               <th
                 scope="col"
@@ -143,6 +149,11 @@ const AdminArticle = () => {
                         alt=""
                       />
                     </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm font-semibold text-gray-900">
+                    {article?.authors_name}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">

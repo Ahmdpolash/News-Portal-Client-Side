@@ -31,6 +31,7 @@ const AddArticle = () => {
     { value: "Travel", label: "Travel" },
     { value: "Business", label: "Business" },
     { value: "Education", label: "Education" },
+    { value: "Politics", label: "Politics" },
   ];
 
   const Diagnose = (e) => {

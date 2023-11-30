@@ -12,7 +12,7 @@ const AllUsers = () => {
   const axiosPublic = useAxiosPublic();
 
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 4; // You can adjust this number based on your preference
+  const itemsPerPage = 5; // You can adjust this number based on your preference
 
   const indexOfLastUser = (currentPage + 1) * itemsPerPage;
   const indexOfFirstUser = indexOfLastUser - itemsPerPage;
@@ -143,10 +143,10 @@ const AllUsers = () => {
             </tbody>
           </table>
 
-          <nav className="flex items-center justify-center ml- py-20 -space-x-px">
+          <nav className="flex items-center  justify-center py-16 -space-x-px">
             <button
               type="button"
-              className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+              className="min-h-[38px] bg-red-500  min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-white hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
               onClick={() => setCurrentPage((prev) => prev - 1)}
               disabled={currentPage === 0}
             >

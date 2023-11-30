@@ -73,7 +73,9 @@ const Route = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://daily-news-server-side.vercel.app/articles/update/${params.id}`),
+          fetch(
+            `https://daily-news-server-side.vercel.app/articles/update/${params.id}`
+          ),
       },
       {
         path: "/details/:id",
@@ -83,7 +85,9 @@ const Route = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://daily-news-server-side.vercel.app/details/${params.id}`),
+          fetch(
+            `https://daily-news-server-side.vercel.app/details/${params.id}`
+          ),
       },
       {
         path: "/premium",
@@ -118,7 +122,11 @@ const Route = createBrowserRouter([
   // =====================Admin routes===============================//
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "adminHome",
