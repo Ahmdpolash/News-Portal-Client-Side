@@ -2,9 +2,18 @@ import { Helmet } from "react-helmet";
 import useAuth from "../../Hooks/useAuth";
 import Container from "../Shared/Container/Container";
 import { FaEdit } from "react-icons/fa";
+import useUser from "../../Hooks/useUser";
+import ProfileModa from "./ProfileModal";
+import ProfileModal from "./ProfileModal";
+import { IoMdClose } from "react-icons/io";
 
-const MyProfile = () => {
+const MyProfile = ({ my_modal_3, showModal, dialog }) => {
   const { user } = useAuth();
+  const [users] = useUser();
+  // console.log(users);
+  const filter = users.find((email) => email.email === user?.email);
+  console.log("email", filter);
+
   return (
     <>
       <Helmet>
@@ -14,7 +23,11 @@ const MyProfile = () => {
         <div className="flex bg-gray-50 justify-center items-center h-[85vh]">
           <div className="w-96 relative px-14 py-16 text-center bg-gray-300 rounded-lg lg:mt-0 xl:px-10">
             <div className="absolute right-2 top-2">
-              <button>
+              <button
+                onClick={() =>
+                  document.getElementById("my_modal_3").showModal()
+                }
+              >
                 <FaEdit className="text-2xl text-red-600" />
               </button>
             </div>
@@ -22,13 +35,13 @@ const MyProfile = () => {
             <div className="space-y-4 xl:space-y-6">
               <img
                 className="mx-auto rounded-full h-28 lg:h-36 lg:w-36"
-                src={user?.photoURL}
+                src={filter?.image}
                 alt="author avatar"
               />
               <div className="space-y-2">
                 <div className="flex justify-center items-center flex-col space-y-3 text-lg font-medium leading-6">
-                  <h3 className="text-black">{user?.displayName}</h3>
-                  <p className="text-green-800">{user?.email}</p>
+                  <h3 className="text-black">{filter?.name}</h3>
+                  <p className="text-green-800">{filter?.email}</p>
                   <div className="flex justify-center mt-5 space-x-5">
                     <a
                       href="#"
@@ -93,6 +106,14 @@ const MyProfile = () => {
                   </div>
                 </div>
               </div>
+
+              <ProfileModal
+                showModal={showModal}
+                filter={filter}
+                my_modal_3={my_modal_3}
+                user={user}
+                dialog={dialog}
+              />
             </div>
           </div>
         </div>
