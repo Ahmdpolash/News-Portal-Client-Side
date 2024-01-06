@@ -38,7 +38,7 @@ The News Portal Website is a full-stack application built using the MERN (MongoD
 
 ## Clone the Repository:
 
-
+```bash
 git clone https://github.com/YourUsername/News-Portal-Project.git
 
 
