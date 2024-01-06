@@ -33,3 +33,11 @@ The News Portal Website is a full-stack application built using the MERN (MongoD
 ### Email Integration
 
 - Email.js Integration: Integrated Email.js for sending transactional emails.
+
+# Installation
+
+## Clone the Repository:
+
+```bash
+git clone https://github.com/YourUsername/News-Portal-Project.git
+
