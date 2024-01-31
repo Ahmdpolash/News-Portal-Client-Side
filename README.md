@@ -30,6 +30,10 @@ The News Portal Website is a full-stack application built using the MERN (MongoD
 - Article Management: Admins have control over the articles submitted by users.
 - Auto-Scrolling System: The application features an auto-scrolling system for a seamless user experience.
 
+### Admin Login : 
+Admin Email : admin@gmail.com
+Admin Pass : Admin@123
+
 ### Email Integration
 
 - Email.js Integration: Integrated Email.js for sending transactional emails.
